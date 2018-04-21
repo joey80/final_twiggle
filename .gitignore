@@ -1,0 +1,3 @@
+vendor/
+.env
+dev/classes/Config.class.php
