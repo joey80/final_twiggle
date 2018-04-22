@@ -1,12 +1,16 @@
 <?php
 
-	require_once('../dev/includes/init.php');
+	include $_SERVER [ 'DOCUMENT_ROOT' ] . '/demo/dev/includes/authInit.php';
+	spl_autoload_register(function ($class) {
+	  include $_SERVER [ 'DOCUMENT_ROOT' ] . '/demo/dev/classes/' . $class . '.class.php';
+	});
 
-	$userId = $userInfo['user_id'];
+	$user = User::getInstance()->getCurrentUser($userInfo);
+	$user_id = $user->user_id;
 
 	// User data
 	$userData = [
-		'userId' => $userId
+		'user_id' => $user_id
 	];
 
 	// Instantiate user
