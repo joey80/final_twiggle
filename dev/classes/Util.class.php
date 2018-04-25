@@ -17,7 +17,7 @@ class Util {
   */
 
   public static function redirect($url) {
-    header('Location: http://' . $_SERVER['HTTP_HOST'] . '/demo/' . $url);
+    header('Location: http://' . $_SERVER['HTTP_HOST'] . '/final_twiggle/' . $url);
     exit;
   }
 

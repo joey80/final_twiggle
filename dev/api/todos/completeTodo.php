@@ -1,20 +1,33 @@
 <?php
 
+	/**
+	* completeTodo.php
+	*
+	* First we get the current logged in user's id and the id
+	* of the todo that we want to complete and then send that
+	* to the database class. The user data gets sent in and the
+	* todo gets marked as completed in the database and the
+	* complete count from the user's stats gets updated as well.
+	*/
 
-	// NEED TO LOOK AT HOW TODO ID IS BEING HANDLED
 
-	require_once('../dev/includes/init.php');
+	include $_SERVER [ 'DOCUMENT_ROOT' ] . '/demo/dev/includes/authInit.php';
+	spl_autoload_register(function ($class) {
+	  include $_SERVER [ 'DOCUMENT_ROOT' ] . '/demo/dev/classes/' . $class . '.class.php';
+	});
+
+	$user = User::getInstance()->getCurrentUser($userInfo);
+	$user_id = $user->user_id;
 
 	// Sanatize the post request
-	$POST     = filter_var_array($_POST, FILTER_SANITIZE_STRING);
-	$id       = $POST['id'];
+	$POST = filter_var_array($_POST, FILTER_SANITIZE_STRING);
+	$todo_id = $POST['todo_id'];
 	$complete = $POST['complete'];
-	$userId   = $userInfo['user_id'];
 
 	// User data
 	$userData = [
-		'user_id'  => $userId,
-		'todo_id'  => $id,
+		'user_id'  => $user_id,
+		'todo_id'  => $todo_id,
 		'complete' => $complete
 	];
 

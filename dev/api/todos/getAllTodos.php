@@ -1,5 +1,13 @@
 <?php
 
+	/**
+	* getAllTodos.php
+	*
+	* First we get the current logged in user's id and send that
+	* to the database class. The user data gets sent in and all
+	* of the todo's from that user gets returned as a JSON object.
+	*/
+
 	include $_SERVER [ 'DOCUMENT_ROOT' ] . '/demo/dev/includes/authInit.php';
 	spl_autoload_register(function ($class) {
 	  include $_SERVER [ 'DOCUMENT_ROOT' ] . '/demo/dev/classes/' . $class . '.class.php';

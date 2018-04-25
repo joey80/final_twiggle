@@ -1,5 +1,14 @@
 <?php
 
+	/**
+	* getUserStats.php
+	*
+	* First we get the current logged in user's id and send that
+	* to the database class. The user data gets sent in and the
+	* stats from the user get sent back as a JSON object.
+	* IE: todos created, todos completed, todos deleted
+	*/
+
 	include $_SERVER [ 'DOCUMENT_ROOT' ] . '/demo/dev/includes/authInit.php';
 	spl_autoload_register(function ($class) {
 	  include $_SERVER [ 'DOCUMENT_ROOT' ] . '/demo/dev/classes/' . $class . '.class.php';
