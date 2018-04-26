@@ -56,11 +56,14 @@
 			// container: '.container',
 			// containerMove: '.container--move',
 			// containerTodo: '.container__todo',
-			// todoName: '.container__header__input',
 			// submitButton: '.container__header__button2',
 			// deleteButton: '.container__todo__delete',
 			// todoForm: 'form',
 			// checkBox: '.check',
+			todoForm: '.todo-form',
+			todoButton: 'todo-button',
+			todoInput: 'todo-input',
+			todoContainer: 'pills-todos',
 			statContainer: 'pills-stats'
 		};
 
@@ -87,7 +90,12 @@
 		// submitButton = document.querySelector(DOM.submitButton),
 		// deleteButton = document.querySelectorAll(DOM.deleteButton),
 		// checkBox = document.querySelector(DOM.checkBox),
-		statContainer = document.getElementById(DOM.statContainer);
+
+		todoForm = document.querySelector(DOM.todoForm),
+		    todoButton = document.getElementById(DOM.todoButton),
+		    todoInput = document.getElementById(DOM.todoInput),
+		    todoContainer = document.getElementById(DOM.todoContainer),
+		    statContainer = document.getElementById(DOM.statContainer);
 
 		// Helper function to check to see if something is visible
 		var isVisible = function (e) {
@@ -163,7 +171,7 @@
 		var getTodos = function (source) {
 
 			var xhr = new XMLHttpRequest();
-			var url = `${source}.php`;
+			var url = `../final_twiggle/dev/api/todos/${source}.php`;
 
 			xhr.onreadystatechange = function () {
 
@@ -171,9 +179,9 @@
 					var todoObj = JSON.parse(xhr.responseText);
 
 					for (var i = 0; i < todoObj.length; i++) {
-						var id = todoObj[i].id,
+						var id = todoObj[i].todo_id,
 						    name = todoObj[i].name,
-						    user = todoObj[i].user,
+						    user = todoObj[i].user_id,
 						    done = todoObj[i].done,
 						    created = todoObj[i].created,
 						    rawDate = created.substring(0, 10),
@@ -189,16 +197,23 @@
 							    isChecked = '';
 						}
 
-						var build = `<div class="container__todo__card" id="todo${id}">
-									<label><input type="checkbox" class="check" id="check${id}" ${isChecked}><span></span></label>
-									<div class="container__todo__name__container">
-									<span class="container__todo__name ${isDone} name${id}">${name}</span>
-									<span class="container__todo__date">${todoMonth} - ${todoDay}</span>
-									</div>
-									<button class="container__todo__delete" id="${id}">&#xf1f8;</button>
-									</div>`;
+						var build = `
+							<div class="container" id="todo-container${id}">
+	  							<div class="row" "id="todo_${id}">
+	    							<div class="col">
+	      								<label><input type="checkbox" class="check" id="check${id}" ${isChecked}><span></span></label>
+	   	 							</div>
+	    							<div class="col-6 ${isDone} name${id}">
+	      								${name}<br />
+	      								${todoMonth} - ${todoDay}
+	    							</div>
+	    							<div class="col">
+	      								<button class="todo-delete btn btn-primary" id="${id}">Delete</button>
+	    							</div>
+	  							</div>
+	  						</div>`;
 
-						containerTodo.insertAdjacentHTML('afterbegin', build);
+						todoContainer.insertAdjacentHTML('afterbegin', build);
 					}
 				}
 			};
@@ -210,18 +225,18 @@
 
 		// Process the input of the new todo after being submitted
 		var postTodo = function (event) {
-			var name = todoName.value;
+			var name = todoInput.value;
 			var xhr = new XMLHttpRequest();
-			var url = 'add.php';
+			var url = '../final_twiggle/dev/api/todos/addTodo.php';
 			var vars = "name=" + name;
 
 			xhr.onreadystatechange = function () {
 				if (this.readyState == 4 && this.status == 200) {
-					getTodos('getLast');
+					getTodos('getLastTodo');
 					getStats();
 
 					//Clear out the input field
-					todoName.value = '';
+					todoInput.value = '';
 				}
 			};
 
@@ -237,16 +252,14 @@
 
 			var id = deleteThis;
 			var xhr = new XMLHttpRequest();
-			var url = 'delete.php';
-			var vars = "id=" + id;
+			var url = '../final_twiggle/dev/api/todos/deleteTodo.php';
+			var vars = "todo_id=" + id;
 
 			xhr.onreadystatechange = function () {
 				if (this.readyState == 4 && this.status == 200) {
-					var child = document.getElementById(`todo${id}`);
-					var parent = document.querySelector('.container__todo');
-					var garbage = parent.removeChild(child);
+					var parent = document.getElementById(`todo-container${id}`);
+					parent.remove();
 					getStats();
-					console.log(`deleted post with the id of ${id}`);
 				}
 			};
 
@@ -289,17 +302,16 @@
 		// Sets up all of the event listener for the header and menu DOM items
 		var setupEventListeners = function () {
 
-			// document.querySelector(DOM.menuButton).addEventListener('click', menuToggle);
-			// document.querySelector(DOM.todoForm).addEventListener('submit', postTodo);
-			// document.querySelector(DOM.submitButton).addEventListener('click', postTodo);
+			document.querySelector(DOM.todoForm).addEventListener('submit', postTodo);
+			document.getElementById(DOM.todoButton).addEventListener('click', postTodo);
 
 			// // Listens for a click on a delete button. This bubbles up by selecting the body instead
 			// // of looping and adding an event listener for every button
-			// document.body.addEventListener('click', function (event) {
-			// 	if (event.target.classList.contains('container__todo__delete')) {
-			// 		deleteTodo(event.target.id);
-			// 	}
-			// });
+			document.body.addEventListener('click', function (event) {
+				if (event.target.classList.contains('todo-delete')) {
+					deleteTodo(event.target.id);
+				}
+			});
 
 			// // Listens for a click on a complete checkbox. This bubbles up by selecting the body instead
 			// // of looping and adding an event listener for every checkbox
@@ -317,8 +329,7 @@
 		return {
 			init: function () {
 				setupEventListeners();
-				// matchHeight(aside, container);
-				// getTodos('getAll');
+				getTodos('getAllTodos');
 				getStats();
 			}
 		};
