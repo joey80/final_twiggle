@@ -20,7 +20,7 @@ var DOMController = function () {
 	};
 
 	return {
-		getDOMstrings: function () {
+		getDOMstrings: function getDOMstrings() {
 			return DOMstrings;
 		}
 	};
@@ -50,16 +50,16 @@ var MenuController = function () {
 	    statContainer = document.getElementById(DOM.statContainer);
 
 	// Helper function to check to see if something is visible
-	var isVisible = function (e) {
+	var isVisible = function isVisible(e) {
 		return !!(e.offsetWidth || e.offsetHeight);
 	};
 
-	var menuToggle = function () {
+	var menuToggle = function menuToggle() {
 		container.classList.toggle('container--move');
 	};
 
 	// This will make sure that the aside and the main container always have the same height
-	var matchHeight = function (div1, div2) {
+	var matchHeight = function matchHeight(div1, div2) {
 
 		var elHeight1 = parseFloat(window.getComputedStyle(div1).getPropertyValue("height"));
 		var elHeight2 = parseFloat(window.getComputedStyle(div2).getPropertyValue("height"));
@@ -73,12 +73,12 @@ var MenuController = function () {
 			}
 		}
 
-		div1.style.height = `${newHeight}px`;
-		div2.style.height = `${newHeight}px`;
+		div1.style.height = newHeight + 'px';
+		div2.style.height = newHeight + 'px';
 	};
 
 	// Helper function to return the name of the month when called from getUTCMonth();
-	var getMonth = function (position) {
+	var getMonth = function getMonth(position) {
 
 		var months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
 		    theMonth = months[position];
@@ -86,7 +86,7 @@ var MenuController = function () {
 		return theMonth;
 	};
 
-	var getStats = function () {
+	var getStats = function getStats() {
 
 		var xhr = new XMLHttpRequest();
 		var url = '../final_twiggle/dev/api/todos/getUserStats.php';
@@ -104,9 +104,7 @@ var MenuController = function () {
 
 					statContainer.innerHTML = '';
 
-					var build = `<p>Total of todos created: ${created}</p>
-								<p>Total of todos completed: ${completed}</p>
-								<p>Total of todos deleted: ${deleted}</p>`;
+					var build = '<p>Total of todos created: ' + created + '</p>\n\t\t\t\t\t\t\t\t<p>Total of todos completed: ' + completed + '</p>\n\t\t\t\t\t\t\t\t<p>Total of todos deleted: ' + deleted + '</p>';
 
 					statContainer.insertAdjacentHTML('afterbegin', build);
 				}
@@ -120,10 +118,10 @@ var MenuController = function () {
 
 	// Connects to the API which lists all of the todo items
 	// 'source' parameter refers to which file to pull the data from
-	var getTodos = function (source) {
+	var getTodos = function getTodos(source) {
 
 		var xhr = new XMLHttpRequest();
-		var url = `../final_twiggle/dev/api/todos/${source}.php`;
+		var url = '../final_twiggle/dev/api/todos/' + source + '.php';
 
 		xhr.onreadystatechange = function () {
 
@@ -149,21 +147,7 @@ var MenuController = function () {
 						    isChecked = '';
 					}
 
-					var build = `
-						<div class="container" id="todo-container${id}">
-  							<div class="row" "id="todo_${id}">
-    							<div class="col">
-      								<label><input type="checkbox" class="check" id="check${id}" ${isChecked}><span></span></label>
-   	 							</div>
-    							<div class="col-6 ${isDone} name${id}">
-      								${name}<br />
-      								${todoMonth} - ${todoDay}
-    							</div>
-    							<div class="col">
-      								<button class="todo-delete btn btn-primary" id="${id}">Delete</button>
-    							</div>
-  							</div>
-  						</div>`;
+					var build = '\n\t\t\t\t\t\t<div class="container" id="todo-container' + id + '">\n  \t\t\t\t\t\t\t<div class="row" "id="todo_' + id + '">\n    \t\t\t\t\t\t\t<div class="col">\n      \t\t\t\t\t\t\t\t<label><input type="checkbox" class="check" id="check' + id + '" ' + isChecked + '><span></span></label>\n   \t \t\t\t\t\t\t\t</div>\n    \t\t\t\t\t\t\t<div class="col-6 ' + isDone + ' name' + id + '">\n      \t\t\t\t\t\t\t\t' + name + '<br />\n      \t\t\t\t\t\t\t\t' + todoMonth + ' - ' + todoDay + '\n    \t\t\t\t\t\t\t</div>\n    \t\t\t\t\t\t\t<div class="col">\n      \t\t\t\t\t\t\t\t<button class="todo-delete btn btn-primary" id="' + id + '">Delete</button>\n    \t\t\t\t\t\t\t</div>\n  \t\t\t\t\t\t\t</div>\n  \t\t\t\t\t\t</div>';
 
 					todoContainer.insertAdjacentHTML('afterbegin', build);
 				}
@@ -176,7 +160,7 @@ var MenuController = function () {
 	};
 
 	// Process the input of the new todo after being submitted
-	var postTodo = function (event) {
+	var postTodo = function postTodo(event) {
 		var name = todoInput.value;
 		var xhr = new XMLHttpRequest();
 		var url = '../final_twiggle/dev/api/todos/addTodo.php';
@@ -206,7 +190,7 @@ var MenuController = function () {
 	};
 
 	// Deletes a todo
-	var deleteTodo = function (deleteThis) {
+	var deleteTodo = function deleteTodo(deleteThis) {
 
 		var id = deleteThis;
 		var xhr = new XMLHttpRequest();
@@ -215,7 +199,7 @@ var MenuController = function () {
 
 		xhr.onreadystatechange = function () {
 			if (this.readyState == 4 && this.status == 200) {
-				var parent = document.getElementById(`todo-container${id}`);
+				var parent = document.getElementById('todo-container' + id);
 				parent.remove();
 				getStats();
 			}
@@ -228,10 +212,10 @@ var MenuController = function () {
 
 	// Completes a todo by changing the CSS styling of the name and marking
 	// it complete in the database
-	var completeTodo = function (completeThis) {
+	var completeTodo = function completeTodo(completeThis) {
 
 		var id = completeThis;
-		var name = document.querySelector(`.name${id}`);
+		var name = document.querySelector('.name' + id);
 		var xhr = new XMLHttpRequest();
 		var url = '../final_twiggle/dev/api/todos/completeTodo.php';
 
@@ -243,7 +227,7 @@ var MenuController = function () {
 			name.classList.add('todo-item--completed');
 		}
 
-		var vars = `todo_id=${id}&complete=${complete}`;
+		var vars = 'todo_id=' + id + '&complete=' + complete;
 
 		xhr.onreadystatechange = function () {
 			if (this.readyState == 4 && this.status == 200) {
@@ -257,7 +241,7 @@ var MenuController = function () {
 	};
 
 	// Sets up all of the event listener for the header and menu DOM items
-	var setupEventListeners = function () {
+	var setupEventListeners = function setupEventListeners() {
 
 		document.querySelector(DOM.todoForm).addEventListener('submit', postTodo);
 		document.getElementById(DOM.todoButton).addEventListener('click', postTodo);
@@ -284,7 +268,7 @@ var MenuController = function () {
 	};
 
 	return {
-		init: function () {
+		init: function init() {
 			setupEventListeners();
 			getTodos('getAllTodos');
 			getStats();

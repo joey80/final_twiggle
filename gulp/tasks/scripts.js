@@ -4,17 +4,19 @@ var gulp = require('gulp'),
 
 gulp.task('babel', function() {
 	return gulp.src('./public/js/app.js')
-		.pipe(babel())
-		.pipe(gulp.dest('./public/js'));
+		.pipe(babel({
+            presets: ['env']
+        }))
+		.pipe(gulp.dest('./public/js/dist'));
 });
 
 gulp.task('webpack', ['babel'], function() {
-	return gulp.src('./public/js/app.js')
+	return gulp.src('./public/js/dist/app.js')
 		.pipe(webpack())
-		.pipe(gulp.dest('./public/js'));
+		.pipe(gulp.dest('./public/js/dist'));
 });
 
-gulp.task('scripts', ['babel', 'webpack']);
+gulp.task('scripts', ['babel']);
 
 /*
 
@@ -26,5 +28,14 @@ gulp.task('scripts', function(callback) {
 	.pipe(babel())
 	.pipe(gulp.dest('./app/temp/scripts'))
 });
+
+
+gulp.task('default', () =>
+	gulp.src('src/app.js')
+		.pipe(babel({
+			presets: ['env']
+		}))
+		.pipe(gulp.dest('dist'))
+);
 
 */

@@ -12,7 +12,7 @@
 
 		<!-- font awesome from BootstrapCDN -->
 		<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet">
-		<!-- <link href="public/css/now-ui-kit.css" rel="stylesheet"> -->
+		<link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet"> 
 		<link href="public/css/app.css" rel="stylesheet">
 
 		<title><?php echo $title ?></title>
