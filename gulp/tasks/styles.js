@@ -8,7 +8,7 @@ var gulp = require('gulp'),
     perfect = require('perfectionist');
 
 gulp.task('styles', function(){
-    return gulp.src('./app/assets/styles/styles.css')
+    return gulp.src('./public/css/app.css')
     .pipe(postCss([
         cssImport,
         mixins,
@@ -21,5 +21,5 @@ gulp.task('styles', function(){
     	console.log(errorInfo.toString());
     	this.emit('end');
     })
-    .pipe(gulp.dest('./app/temp/styles'));
+    .pipe(gulp.dest('./public/css/dist'));
 });

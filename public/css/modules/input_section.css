@@ -1,0 +1,100 @@
+/*
+
+INPUT SECTION STYLES
+
+*/
+
+.app-title {
+  font-family: 'Life Savers', cursive;
+  /*font-weight: bold;*/
+  font-size: 2.5em;
+  /*letter-spacing: -2px;*/
+  color: #332e51;
+
+  @mixin mediumScreen {
+    font-size: 3.5em;
+    /*letter-spacing: -3px;*/
+  }
+
+}
+
+.app-subtitle {
+  display: inline-block;
+  padding-left: 10px;
+  font-size: 0.7em;
+  color: #504f55;
+  transform: translateY(-1px);
+  /*font-weight: bold;*/
+
+  @mixin mediumScreen {
+    font-size: 0.9em;
+    padding-left: 15px;
+    transform: translateY(-3px);
+  }
+
+}
+
+.todo-form {
+  margin-top: 5px;
+}
+
+.todoButton {
+  background-color: #332e51;
+  padding: 12px;
+  color: #fff;
+  font-size: 0.8em;
+
+  @mixin mediumScreen {
+    font-size: 1em;
+  }
+
+  &:hover {
+    background-color: #5b5192;
+    cursor: pointer;
+  }
+}
+
+.card {
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.jumbotron {
+  padding-top: 5px;
+  padding-bottom: 30px;
+  margin-bottom: 10px;
+  background-size: cover;
+  background-image: url('../../images/background.jpg');
+  border-bottom: 1px dashed rgba(51, 46, 81, 0.3);
+}
+
+.todo-nav {
+  width: 100%;
+  background-color: rgba(51, 46, 81, 1);
+  border-radius: .3rem;
+  border-bottom: 1px dashed rgba(51, 46, 81, 0.3);
+  padding: 0px;
+  font-size: 1.2em;
+  text-transform: uppercase;
+}
+
+.nav-pills .nav-link.active, .nav-pills .show > .nav-link {
+  background-color: #b82998;
+  border-radius: 0;
+  transition: all 0.3s ease-in-out;
+}
+
+.nav-item a {
+  color: #fff;
+  font-size: 0.7em;
+  /*padding: 1px 70px 1px 70px;*/
+
+  @mixin mediumScreen {
+    font-size: 1em;
+    padding: 1px 70px 1px 70px;
+  }
+}
+
+.tab-content {
+  margin-top: 70px;
+}

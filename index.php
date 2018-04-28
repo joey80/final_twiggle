@@ -25,17 +25,17 @@ require_once('dev/includes/header.php');
 
         <!-- LOGO AND TODO INPUT SECTION -->
         <div class="jumbotron">
-          <span class="app-title">twiggle</span><span class="app-subtitle"> - A Todo App</span>
+          <span class="app-title">Twiggle</span><span class="app-subtitle"> - A Todo App</span>
           <form class="input-group todo-form mb-3">
             <input type="text" class="form-control" id="todo-input" placeholder="What Do You Need To Do?" aria-label="What Do You Need To Do?" aria-describedby="basic-addon2">
             <div class="input-group-append">
-              <button class="btn btn-lg todoButton" id="todo-button" type="button">Add Todo</button>
+              <button class="btn todoButton" id="todo-button" type="button">Add Todo</button>
             </div>
           </form>
         </div>
 
         <!-- NAVIGATION SECTION -->
-        <ul class="nav justify-content-center nav-pills mb-3" id="pills-tab" role="tablist">
+        <ul class="nav justify-content-center nav-pills mb-3 todo-nav" id="pills-tab" role="tablist">
           <li class="nav-item">
             <a class="nav-link active" id="pills-todos-tab" data-toggle="pill" href="#pills-todos" role="tab" aria-controls="pills-home" aria-selected="true">Todos</a>
           </li>
