@@ -1,15 +1,15 @@
 <?php
 
   // Require composer autoloader
-  require_once($_SERVER [ 'DOCUMENT_ROOT' ] . './final_twiggle/vendor/autoload.php');
-  require_once($_SERVER [ 'DOCUMENT_ROOT' ] . './final_twiggle/dotenv-loader.php');
+  require_once($_SERVER [ 'DOCUMENT_ROOT' ] . '/final_twiggle/vendor/autoload.php');
+  require_once($_SERVER [ 'DOCUMENT_ROOT' ] . '/final_twiggle/dotenv-loader.php');
 
   use Auth0\SDK\Auth0;
 
   $domain        = getenv('AUTH0_DOMAIN');
   $client_id     = getenv('AUTH0_CLIENT_ID');
   $client_secret = getenv('AUTH0_CLIENT_SECRET');
-  $redirect_uri  = "http://localhost/final_twiggle/checkUser.php";
+  $redirect_uri  = "http://joeyui.com/final_twiggle/checkUser.php";
   $audience      = getenv('AUTH0_AUDIENCE');
 
   if($audience == ''){

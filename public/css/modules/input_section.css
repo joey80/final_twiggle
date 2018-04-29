@@ -9,7 +9,7 @@ INPUT SECTION STYLES
   /*font-weight: bold;*/
   font-size: 2.5em;
   /*letter-spacing: -2px;*/
-  color: #332e51;
+  color: #fff;
 
   @mixin mediumScreen {
     font-size: 3.5em;
@@ -22,7 +22,7 @@ INPUT SECTION STYLES
   display: inline-block;
   padding-left: 10px;
   font-size: 0.7em;
-  color: #504f55;
+  color: #fff;
   transform: translateY(-1px);
   /*font-weight: bold;*/
 
@@ -38,11 +38,19 @@ INPUT SECTION STYLES
   margin-top: 5px;
 }
 
+#todo-input {
+  font-size: 0.8em;
+
+    @mixin mediumScreen {
+      font-size: 1em;
+    }
+}
+
 .todoButton {
   background-color: #332e51;
   padding: 12px;
   color: #fff;
-  font-size: 0.8em;
+  font-size: 0.7em;
 
   @mixin mediumScreen {
     font-size: 1em;
@@ -61,27 +69,32 @@ INPUT SECTION STYLES
 
 .jumbotron {
   padding-top: 5px;
-  padding-bottom: 30px;
+  padding-bottom: 5px;
   margin-bottom: 10px;
-  background-size: cover;
-  background-image: url('../../images/background.jpg');
+  background-image: linear-gradient(to right top, #041125, #243248, #46556e, #6a7b97, #8fa4c2);
+  /*background-image: url('../../images/background.jpg');*/
   border-bottom: 1px dashed rgba(51, 46, 81, 0.3);
+
+    @mixin mediumScreen {
+      padding-bottom: 30px;
+    }
 }
 
 .todo-nav {
   width: 100%;
-  background-color: rgba(51, 46, 81, 1);
+  background-color: #041125;
   border-radius: .3rem;
-  border-bottom: 1px dashed rgba(51, 46, 81, 0.3);
   padding: 0px;
   font-size: 1.2em;
-  text-transform: uppercase;
+  /*text-transform: uppercase;*/
 }
 
 .nav-pills .nav-link.active, .nav-pills .show > .nav-link {
-  background-color: #b82998;
-  border-radius: 0;
+  background-color: #8FA4C2;
+  color: #041125;
   transition: all 0.3s ease-in-out;
+  border-radius: 0;
+  /*box-shadow: 0px 0px 53px -8px rgba(0,0,0,0.44);}*/
 }
 
 .nav-item a {
@@ -91,7 +104,7 @@ INPUT SECTION STYLES
 
   @mixin mediumScreen {
     font-size: 1em;
-    padding: 1px 70px 1px 70px;
+    padding: 10px 60px 10px 60px;
   }
 }
 

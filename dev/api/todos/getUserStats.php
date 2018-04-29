@@ -9,9 +9,9 @@
 	* IE: todos created, todos completed, todos deleted
 	*/
 
-	include $_SERVER [ 'DOCUMENT_ROOT' ] . '/demo/dev/includes/authInit.php';
+	include $_SERVER [ 'DOCUMENT_ROOT' ] . '/final_twiggle/dev/includes/authInit.php';
 	spl_autoload_register(function ($class) {
-	  include $_SERVER [ 'DOCUMENT_ROOT' ] . '/demo/dev/classes/' . $class . '.class.php';
+	  include $_SERVER [ 'DOCUMENT_ROOT' ] . '/final_twiggle/dev/classes/' . $class . '.class.php';
 	});
 
 	$user = User::getInstance()->getCurrentUser($userInfo);

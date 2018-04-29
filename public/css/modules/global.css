@@ -4,6 +4,14 @@ GLOBAL STYLES
 
 */
 
+* {
+	box-sizing: border-box;
+}
+
+a:focus {
+	outline: none;
+}
+
 body {
   font-family: 'Montserrat', sans-serif;
   background-color: #f6f8fb;
