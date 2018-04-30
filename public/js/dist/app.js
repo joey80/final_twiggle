@@ -126,6 +126,7 @@ var MenuController = function () {
 		xhr.onreadystatechange = function () {
 
 			if (this.readyState == 4 && this.status == 200) {
+
 				var todoObj = JSON.parse(xhr.responseText);
 
 				for (var i = 0; i < todoObj.length; i++) {
@@ -147,7 +148,7 @@ var MenuController = function () {
 						    isChecked = '';
 					}
 
-					var build = '\n\t\t\t\t\t\t<div class="container" id="todo-container' + id + '">\n  \t\t\t\t\t\t\t<div class="row" "id="todo_' + id + '">\n    \t\t\t\t\t\t\t<div class="col">\n      \t\t\t\t\t\t\t\t<label><input type="checkbox" class="check" id="check' + id + '" ' + isChecked + '><span></span></label>\n   \t \t\t\t\t\t\t\t</div>\n    \t\t\t\t\t\t\t<div class="col-6 ' + isDone + ' name' + id + '">\n      \t\t\t\t\t\t\t\t' + name + '<br />\n      \t\t\t\t\t\t\t\t' + todoMonth + ' - ' + todoDay + '\n    \t\t\t\t\t\t\t</div>\n    \t\t\t\t\t\t\t<div class="col">\n      \t\t\t\t\t\t\t\t<button class="todo-delete btn btn-primary" id="' + id + '">Delete</button>\n    \t\t\t\t\t\t\t</div>\n  \t\t\t\t\t\t\t</div>\n  \t\t\t\t\t\t</div>';
+					var build = '\n\t\t\t\t\t\t<div class="container todo-container" id="todo-container' + id + '">\n\t\t\t\t\t\t\t<div class="row">\n\t\t\t\t\t\t\t\t<div class="col" "id="todo_' + id + '">\n      \t\t\t\t\t\t\t\t<label><input type="checkbox" class="check" id="check' + id + '" ' + isChecked + '><span></span></label>\n\t      \t\t\t\t\t\t</div>\n\t    \t\t\t\t\t\t<div class="col-6 ' + isDone + ' name' + id + '">\n\t      \t\t\t\t\t\t\t<span class="todo-name">' + name + '</span>\n\t      \t\t\t\t\t\t\t<span class="todo-date">' + todoMonth + ' - ' + todoDay + '</span>\n\t    \t\t\t\t\t\t</div>\n\t    \t\t\t\t\t\t<div class="col">\n\t      \t\t\t\t\t\t\t<i class="fa fa-trash-o todo-delete" id="' + id + '"></i>\n\t    \t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t</div>\n  \t\t\t\t\t\t</div>';
 
 					todoContainer.insertAdjacentHTML('afterbegin', build);
 				}

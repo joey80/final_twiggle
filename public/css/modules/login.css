@@ -1,0 +1,28 @@
+/*
+
+LOGIN PAGE STYLES STYLES
+
+*/
+
+.fullscreen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  overflow: auto;
+  background-image: linear-gradient(to right top, #041125, #243248, #46556e, #6a7b97, #8fa4c2);
+}
+
+.todo-login {
+  margin-top: 150px;
+  /*background-color: rgb(255, 255, 255, 0.5);*/
+
+  @mixin mediumScreen {
+    margin-top: 180px;
+  }
+}
+
+.todo-login-button {
+  margin-top: 30px;
+}
