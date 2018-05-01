@@ -3,15 +3,6 @@
 var DOMController = function () {
 
 	var DOMstrings = {
-		// menuButton: '.container__header__button',
-		// aside: '.aside',
-		// container: '.container',
-		// containerMove: '.container--move',
-		// containerTodo: '.container__todo',
-		// submitButton: '.container__header__button2',
-		// deleteButton: '.container__todo__delete',
-		// todoForm: 'form',
-		// checkBox: '.check',
 		todoForm: '.todo-form',
 		todoButton: 'todo-button',
 		todoInput: 'todo-input',
@@ -29,53 +20,11 @@ var DOMController = function () {
 var MenuController = function () {
 
 	var DOM = DOMController.getDOMstrings(),
-
-
-	// menuButton = document.querySelector(DOM.menuButton),
-	// aside = document.querySelector(DOM.aside),
-	// container = document.querySelector(DOM.container),
-	// containerClass = document.querySelector(DOM.container).classList,
-	// containerMove = document.querySelector(DOM.containerMove),
-	// containerTodo = document.querySelector(DOM.containerTodo),
-	// todoName = document.querySelector(DOM.todoName),
-	// todoForm = document.getElementById(DOM.todoForm),
-	// submitButton = document.querySelector(DOM.submitButton),
-	// deleteButton = document.querySelectorAll(DOM.deleteButton),
-	// checkBox = document.querySelector(DOM.checkBox),
-
-	todoForm = document.querySelector(DOM.todoForm),
+	    todoForm = document.querySelector(DOM.todoForm),
 	    todoButton = document.getElementById(DOM.todoButton),
 	    todoInput = document.getElementById(DOM.todoInput),
 	    todoContainer = document.getElementById(DOM.todoContainer),
 	    statContainer = document.getElementById(DOM.statContainer);
-
-	// Helper function to check to see if something is visible
-	var isVisible = function isVisible(e) {
-		return !!(e.offsetWidth || e.offsetHeight);
-	};
-
-	var menuToggle = function menuToggle() {
-		container.classList.toggle('container--move');
-	};
-
-	// This will make sure that the aside and the main container always have the same height
-	var matchHeight = function matchHeight(div1, div2) {
-
-		var elHeight1 = parseFloat(window.getComputedStyle(div1).getPropertyValue("height"));
-		var elHeight2 = parseFloat(window.getComputedStyle(div2).getPropertyValue("height"));
-		var viewPort = window.innerHeight;
-		var heights = [viewPort, elHeight1, elHeight2];
-		var newHeight = 0;
-
-		for (var i = 0; i < heights.length; i++) {
-			if (heights[i] > newHeight) {
-				newHeight = heights[i];
-			}
-		}
-
-		div1.style.height = newHeight + 'px';
-		div2.style.height = newHeight + 'px';
-	};
 
 	// Helper function to return the name of the month when called from getUTCMonth();
 	var getMonth = function getMonth(position) {
@@ -129,6 +78,11 @@ var MenuController = function () {
 
 				var todoObj = JSON.parse(xhr.responseText);
 
+				if (todoObj.length == 0) {
+					addTodoMessage();
+					return;
+				}
+
 				for (var i = 0; i < todoObj.length; i++) {
 					var id = todoObj[i].todo_id,
 					    name = todoObj[i].name,
@@ -149,15 +103,22 @@ var MenuController = function () {
 					}
 
 					var build = '\n\t\t\t\t\t\t<div class="container todo-container" id="todo-container' + id + '">\n\t\t\t\t\t\t\t<div class="row">\n\t\t\t\t\t\t\t\t<div class="col" "id="todo_' + id + '">\n      \t\t\t\t\t\t\t\t<label><input type="checkbox" class="check" id="check' + id + '" ' + isChecked + '><span></span></label>\n\t      \t\t\t\t\t\t</div>\n\t    \t\t\t\t\t\t<div class="col-6 ' + isDone + ' name' + id + '">\n\t      \t\t\t\t\t\t\t<span class="todo-name">' + name + '</span>\n\t      \t\t\t\t\t\t\t<span class="todo-date">' + todoMonth + ' - ' + todoDay + '</span>\n\t    \t\t\t\t\t\t</div>\n\t    \t\t\t\t\t\t<div class="col">\n\t      \t\t\t\t\t\t\t<i class="fa fa-trash-o todo-delete" id="' + id + '"></i>\n\t    \t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t</div>\n  \t\t\t\t\t\t</div>';
-
-					todoContainer.insertAdjacentHTML('afterbegin', build);
 				}
+
+				todoContainer.insertAdjacentHTML('afterbegin', build);
 			}
 		};
 
 		// Add some randomness to the URL to bypass the cache
 		xhr.open("GET", url + (/\?/.test(url) ? "&" : "?") + new Date().getTime(), true);
 		xhr.send();
+	};
+
+	// The message that gets displayed if the user hasn't added any todos
+	var addTodoMessage = function addTodoMessage() {
+
+		var zeroBuild = '\n\t\t\t<div id="add-todo-message">\n\t\t\t\t<img src="../final_twiggle/public/images/owl.png" />\n\t\t\t\t<h2>You need to add some todos!!</h2>\n\t\t\t</div>\n\t\t\t';
+		todoContainer.insertAdjacentHTML('afterbegin', zeroBuild);
 	};
 
 	// Process the input of the new todo after being submitted
@@ -167,6 +128,13 @@ var MenuController = function () {
 		var url = '../final_twiggle/dev/api/todos/addTodo.php';
 		var vars = "name=" + name;
 		event.preventDefault();
+
+		// Check to see if this is the first todo to be added. If so,
+		// remove the message asking the user to add a todo and then 
+		// display the todo.
+		if (todoContainer.querySelector("#add-todo-message") != null) {
+			todoContainer.querySelector("#add-todo-message").remove();
+		}
 
 		if (name === '') {
 			$('#todo-error').modal();
@@ -203,6 +171,12 @@ var MenuController = function () {
 				var parent = document.getElementById('todo-container' + id);
 				parent.remove();
 				getStats();
+			}
+
+			// Check to see if you've deleted the last todo. If so, show the message
+			// that you need to add more todos.
+			if (todoContainer.querySelector("#add-todo-message") == null) {
+				addTodoMessage();
 			}
 		};
 
