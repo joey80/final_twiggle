@@ -102,10 +102,10 @@ var MenuController = function () {
 						    isChecked = '';
 					}
 
-					var build = '\n\t\t\t\t\t\t<div class="container todo-container" id="todo-container' + id + '">\n\t\t\t\t\t\t\t<div class="row">\n\t\t\t\t\t\t\t\t<div class="col" "id="todo_' + id + '">\n      \t\t\t\t\t\t\t\t<label><input type="checkbox" class="check" id="check' + id + '" ' + isChecked + '><span></span></label>\n\t      \t\t\t\t\t\t</div>\n\t    \t\t\t\t\t\t<div class="col-6 ' + isDone + ' name' + id + '">\n\t      \t\t\t\t\t\t\t<span class="todo-name">' + name + '</span>\n\t      \t\t\t\t\t\t\t<span class="todo-date">' + todoMonth + ' - ' + todoDay + '</span>\n\t    \t\t\t\t\t\t</div>\n\t    \t\t\t\t\t\t<div class="col">\n\t      \t\t\t\t\t\t\t<i class="fa fa-trash-o todo-delete" id="' + id + '"></i>\n\t    \t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t</div>\n  \t\t\t\t\t\t</div>';
-				}
+					var todoBuild = '\n\t\t\t\t\t\t<div class="container todo-container" id="todo-container' + id + '">\n\t\t\t\t\t\t\t<div class="row">\n\t\t\t\t\t\t\t\t<div class="col" id="todo_' + id + '">\n      \t\t\t\t\t\t\t\t<label><input type="checkbox" class="check" id="check' + id + '" ' + isChecked + '><span></span></label>\n\t      \t\t\t\t\t\t</div>\n\t    \t\t\t\t\t\t<div class="col-6 ' + isDone + ' name' + id + '">\n\t      \t\t\t\t\t\t\t<span class="todo-name">' + name + '</span>\n\t      \t\t\t\t\t\t\t<span class="todo-date">' + todoMonth + ' - ' + todoDay + '</span>\n\t    \t\t\t\t\t\t</div>\n\t    \t\t\t\t\t\t<div class="col">\n\t      \t\t\t\t\t\t\t<i class="fa fa-trash-o todo-delete" id="' + id + '"></i>\n\t    \t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t</div>\n  \t\t\t\t\t\t</div>';
 
-				todoContainer.insertAdjacentHTML('afterbegin', build);
+					todoContainer.insertAdjacentHTML('afterbegin', todoBuild);
+				}
 			}
 		};
 
@@ -117,7 +117,7 @@ var MenuController = function () {
 	// The message that gets displayed if the user hasn't added any todos
 	var addTodoMessage = function addTodoMessage() {
 
-		var zeroBuild = '\n\t\t\t<div id="add-todo-message">\n\t\t\t\t<img src="../final_twiggle/public/images/owl.png" />\n\t\t\t\t<h2>You need to add some todos!!</h2>\n\t\t\t</div>\n\t\t\t';
+		var zeroBuild = '\n\t\t\t<div id="add-todo-message">\n\t\t\t\tYou need to add some todos!!\n\t\t\t\t<div class="todo-owl"></div>\n\t\t\t</div>\n\t\t\t';
 		todoContainer.insertAdjacentHTML('afterbegin', zeroBuild);
 	};
 
@@ -129,19 +129,19 @@ var MenuController = function () {
 		var vars = "name=" + name;
 		event.preventDefault();
 
-		// Check to see if this is the first todo to be added. If so,
-		// remove the message asking the user to add a todo and then 
-		// display the todo.
-		if (todoContainer.querySelector("#add-todo-message") != null) {
-			todoContainer.querySelector("#add-todo-message").remove();
-		}
-
 		if (name === '') {
 			$('#todo-error').modal();
 		} else {
 
 			xhr.onreadystatechange = function () {
 				if (this.readyState == 4 && this.status == 200) {
+
+					// Check to see if this is the first todo to be added. If so,
+					// remove the message asking the user to add a todo and then 
+					// display the todo.
+					if (todoContainer.querySelector("#add-todo-message") != null) {
+						todoContainer.querySelector("#add-todo-message").remove();
+					}
 
 					getTodos('getLastTodo');
 					getStats();
@@ -171,12 +171,12 @@ var MenuController = function () {
 				var parent = document.getElementById('todo-container' + id);
 				parent.remove();
 				getStats();
-			}
 
-			// Check to see if you've deleted the last todo. If so, show the message
-			// that you need to add more todos.
-			if (todoContainer.querySelector("#add-todo-message") == null) {
-				addTodoMessage();
+				// Check to see if you've deleted the last todo. If so, show the message
+				// that you need to add more todos.
+				if (todoContainer.children.length < 1) {
+					addTodoMessage();
+				}
 			}
 		};
 

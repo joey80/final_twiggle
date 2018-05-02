@@ -172,6 +172,7 @@ INPUT SECTION STYLES
 
 .todo-delete {
   font-size: 1.4em;
+  padding-top: 8px;
 
   @mixin mediumScreen {
     font-size: 2em;
@@ -201,12 +202,16 @@ input[type="checkbox"]+span:hover {
 }
 
 input[type="checkbox"]+span:before {
-    font-size: 1.3em;
+    font-size: 1.4em;
     font-family: FontAwesome;
     content: '\00f096';
     display: inline-block;
     width: 16pt;
     padding: 2px 0 0 3px;
+
+    @mixin mediumScreen {
+      font-size: 2em;
+    }
 }
 
 input[type="checkbox"]:checked+span:before {
@@ -303,4 +308,26 @@ input[type="checkbox"]:checked+span:before {
         -webkit-transform: scale3d(1, 1, 1);
                 transform: scale3d(1, 1, 1);
     }
+}
+
+.todo-owl {
+  margin: 20px auto;
+  width: 90%;
+  height: 200px;
+  background-image: url('../../images/owl.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+
+  @mixin mediumScreen {
+    height: 400px
+  }
+}
+
+#add-todo-message {
+  font-size: 1.4em;
+
+  @mixin mediumScreen {
+    font-size: 2em;
+  }
 }

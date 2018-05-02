@@ -75,7 +75,7 @@ var MenuController = function () {
 
 	// Connects to the API which lists all of the todo items
 	// 'source' parameter refers to which file to pull the data from
-	var getTodos = function (source) {
+	var getTodos = function(source) {
 
 		var xhr = new XMLHttpRequest();
 		var url = `../final_twiggle/dev/api/todos/${source}.php`;
@@ -110,10 +110,10 @@ var MenuController = function () {
 						    isChecked = '';
 					}
 
-					var build = `
+					var todoBuild = `
 						<div class="container todo-container" id="todo-container${id}">
 							<div class="row">
-								<div class="col" "id="todo_${id}">
+								<div class="col" id="todo_${id}">
       								<label><input type="checkbox" class="check" id="check${id}" ${isChecked}><span></span></label>
 	      						</div>
 	    						<div class="col-6 ${isDone} name${id}">
@@ -125,9 +125,10 @@ var MenuController = function () {
 	    						</div>
 							</div>
   						</div>`;
+
+  					todoContainer.insertAdjacentHTML('afterbegin', todoBuild);
 				}
 
-				todoContainer.insertAdjacentHTML('afterbegin', build);
 			}
 		}
 
@@ -143,8 +144,8 @@ var MenuController = function () {
 
 		var zeroBuild = `
 			<div id="add-todo-message">
-				<img src="../final_twiggle/public/images/owl.png" />
-				<h2>You need to add some todos!!</h2>
+				You need to add some todos!!
+				<div class="todo-owl"></div>
 			</div>
 			`;
 		todoContainer.insertAdjacentHTML('afterbegin', zeroBuild);
@@ -160,13 +161,6 @@ var MenuController = function () {
 		var vars = "name=" + name;
 		event.preventDefault();
 
-		// Check to see if this is the first todo to be added. If so,
-		// remove the message asking the user to add a todo and then 
-		// display the todo.
-		if (todoContainer.querySelector("#add-todo-message") != null) {
-			todoContainer.querySelector("#add-todo-message").remove();
-		}
-
 		if (name === '') {
 			$('#todo-error').modal();
 		} else {
@@ -174,6 +168,13 @@ var MenuController = function () {
 			xhr.onreadystatechange = function () {
 				if (this.readyState == 4 && this.status == 200) {
 
+					// Check to see if this is the first todo to be added. If so,
+					// remove the message asking the user to add a todo and then 
+					// display the todo.
+					if (todoContainer.querySelector("#add-todo-message") != null) {
+						todoContainer.querySelector("#add-todo-message").remove();
+					}
+					
 					getTodos('getLastTodo');
 					getStats();
 
@@ -204,12 +205,12 @@ var MenuController = function () {
 				var parent = document.getElementById(`todo-container${id}`);
 				parent.remove();
 				getStats();
-			}
 
-			// Check to see if you've deleted the last todo. If so, show the message
-			// that you need to add more todos.
-			if (todoContainer.querySelector("#add-todo-message") == null) {
-				addTodoMessage();
+				// Check to see if you've deleted the last todo. If so, show the message
+				// that you need to add more todos.
+				if (todoContainer.children.length < 1) {
+					addTodoMessage();
+				}
 			}
 		};
 
