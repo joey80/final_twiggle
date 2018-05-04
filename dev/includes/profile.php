@@ -8,30 +8,21 @@
   */
 
   $mysqlDate = strtotime($user->created);
-
+  //action="upload_picture.php" method="post" enctype="multipart/form-data"
 ?>
 
 <div class="card">
-  <img class="card-img-top" src="<?php echo $user->picture ?>" alt="Profile Picture">
+  <img class="card-img-top todo-profile-image" src="<?php echo $user->picture ?>" alt="Profile Picture">
   <div class="card-body">
-    <h5 class="card-title"><?php echo $user->name ?></h5>
-    <p><a class="btn btn-primary" href="/final_twiggle/logout.php">Logout</a></p>
-    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-  </div>
-  <ul class="list-group list-group-flush">
-    <li class="list-group-item">User ID: <?php echo $user->user_id ?></li>
-    <li class="list-group-item">Email: <?php echo $user->email ?></li>
-    <li class="list-group-item">User Since: <?php echo date("F Y", $mysqlDate); ?></li>
-  </ul>
-</div>
-<div class="card">
-  <div class="card-body">
-    <form action="upload_picture.php" method="post" enctype="multipart/form-data">
-      <div class="form-group">
-        <label>Upload a Profile Picture:</label>
-        <input type="file" name="file" id="file">
-        <button class="btn btn-primary" type="submit" name="submit" value="Upload Profile Picture">Upload Profile Picture</button>
-      </div>
+    <h3 class="card-title"><?php echo $user->name ?></h3>
+    <?php echo $user->email ?>
+    <p class="card-text">User Since: <?php echo date("F Y", $mysqlDate); ?></p>
+    <p><a class="btn btn-dark btn-sm" href="/final_twiggle/logout.php">Logout</a></p>
+    <hr>
+    <form method="post" enctype="multipart/form-data">
+      <label><strong>Change Profile Picture</strong></label><br />
+      <input type="file" class="filestyle" data-placeholder="No file" name="file" id="todo-image-file" hidden><br />
+      <button class="btn btn-outline-primary" id="update-profile-picture-button" type="submit" name="submit" value="Upload Profile Picture">Upload</button>
     </form>
   </div>
 </div>

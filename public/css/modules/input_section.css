@@ -156,7 +156,7 @@ INPUT SECTION STYLES
 .todo-name {
   display: block;
   font-size: 0.9em;
-  color: #4b4652;
+  /*color: #4b4652;*/
   text-transform: capitalize;
 
   @mixin mediumScreen {
@@ -330,4 +330,63 @@ input[type="checkbox"]:checked+span:before {
   @mixin mediumScreen {
     font-size: 2em;
   }
+}
+
+hr {
+  height: 6px;
+  /*background: url('http://ibrahimjabbari.com/english/images/hr-11.png') repeat-x 0 0;
+  border: 0;*/
+}
+
+.todo-login-text {
+  font-size: 0.7em;
+
+  @mixin mediumScreen {
+    font-size: 1em;
+  }
+}
+
+.todo-stat-card {
+  margin-bottom: 30px;
+
+  @mixin mediumScreen {
+    margin-bottom: 0;
+  }
+
+  &__container {
+    background-color: #fff;
+    border-radius: .3rem;
+  }
+
+  &__image {
+    display: block;
+    margin: 20px auto;
+    width: 100px;
+
+    @mixin mediumScreen {
+      width: 200px;
+    }
+  }
+
+  &__title {
+    font-size: 1em;
+
+    @mixin mediumScreen {
+      font-size: 1.4em;
+    }
+  }
+
+  &__numbers {
+    display: block;
+    font-family: 'Life Savers', cursive;
+    font-size: 3em;
+
+    @mixin mediumScreen {
+      font-size: 4em;
+    }
+  }
+}
+
+.todo-profile-image {
+  max-height: 300px;
 }

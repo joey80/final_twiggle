@@ -30,7 +30,7 @@ require_once('dev/includes/header.php');
           <div class="jumbotron">
             <span class="app-title">Twiggle</span><span class="app-subtitle"> - A Todo App</span>
             <form class="input-group todo-form mb-3">
-              <input type="text" class="form-control" id="todo-input" placeholder="What Do You Need To Do?" aria-label="What Do You Need To Do?" aria-describedby="basic-addon2">
+              <input type="text" class="form-control" id="todo-input" autocomplete="off" placeholder="What Do You Need To Do?" aria-label="What Do You Need To Do?" aria-describedby="basic-addon2">
               <div class="input-group-append">
                 <button class="btn todoButton" id="todo-button" type="button">Add Todo</button>
               </div>
@@ -66,7 +66,7 @@ require_once('dev/includes/header.php');
           <!-- TODOS -->
         </div>
         <div class="tab-pane fade" id="pills-stats" role="tabpanel" aria-labelledby="pills-stats-tab">
-          <!-- STATS -->       
+          <!-- STATS -->
         </div>
         <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
           <!-- PROFILE -->

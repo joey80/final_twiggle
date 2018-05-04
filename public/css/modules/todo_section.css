@@ -6,4 +6,5 @@ TODO SECTION STYLES
 
 .todo-item--completed {
   text-decoration: line-through;
+  color: #a5a5a5;
 }

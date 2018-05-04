@@ -19,7 +19,6 @@
         </button>
       </div>
       <div class="modal-body">
-        You forgot to enter a todo. It's ok we all make mistakes.
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

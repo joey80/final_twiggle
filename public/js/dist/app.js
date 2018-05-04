@@ -7,7 +7,9 @@ var DOMController = function () {
 		todoButton: 'todo-button',
 		todoInput: 'todo-input',
 		todoContainer: 'pills-todos',
-		statContainer: 'pills-stats'
+		statContainer: 'pills-stats',
+		updatePicButton: 'update-profile-picture-button',
+		fileInput: 'file'
 	};
 
 	return {
@@ -24,7 +26,9 @@ var MenuController = function () {
 	    todoButton = document.getElementById(DOM.todoButton),
 	    todoInput = document.getElementById(DOM.todoInput),
 	    todoContainer = document.getElementById(DOM.todoContainer),
-	    statContainer = document.getElementById(DOM.statContainer);
+	    statContainer = document.getElementById(DOM.statContainer),
+	    updatePicButton = document.getElementById(DOM.updatePicButton),
+	    fileInput = document.getElementById(DOM.fileInput);
 
 	// Helper function to return the name of the month when called from getUTCMonth();
 	var getMonth = function getMonth(position) {
@@ -51,9 +55,13 @@ var MenuController = function () {
 					    completed = statsObj[i].todos_completed,
 					    deleted = statsObj[i].todos_deleted;
 
-					statContainer.innerHTML = '';
+					// statContainer.innerHTML = '';
+					var stats = document.querySelector('.todo-stat-card__container');
+					if (stats) {
+						stats.remove();
+					}
 
-					var build = '<p>Total of todos created: ' + created + '</p>\n\t\t\t\t\t\t\t\t<p>Total of todos completed: ' + completed + '</p>\n\t\t\t\t\t\t\t\t<p>Total of todos deleted: ' + deleted + '</p>';
+					var build = '\n\t\t\t\t\t\t\t<div class="row todo-stat-card__container">\n\t\t\t\t\t            <div class="col-sm todo-stat-card">\n\t\t\t\t\t              <img src="public/images/created-owl.png" class="todo-stat-card__image">\n\t\t\t\t\t              <span class="todo-stat-card__title">Todos Created</span>\n\t\t\t\t\t              <span class="todo-stat-card__numbers">' + created + '</span>\n\t\t\t\t\t            </div>\n\t\t\t\t\t            <div class="col-sm todo-stat-card">\n\t\t\t\t\t              <img src="public/images/completed-owl.png" class="todo-stat-card__image">\n\t\t\t\t\t              <span class="todo-stat-card__title">Todos Completed</span>\n\t\t\t\t\t              <span class="todo-stat-card__numbers">' + completed + '</span>\n\t\t\t\t\t            </div>\n\t\t\t\t\t            <div class="col-sm todo-stat-card">\n\t\t\t\t\t              <img src="public/images/deleted-owl.png" class="todo-stat-card__image">\n\t\t\t\t\t              <span class="todo-stat-card__title">Todos Deleted</span>\n\t\t\t\t\t              <span class="todo-stat-card__numbers">' + deleted + '</span>\n\t\t\t\t\t        \t</div>\n\t\t\t\t\t        </div>\n\t\t\t\t\t\t\t\t';
 
 					statContainer.insertAdjacentHTML('afterbegin', build);
 				}
@@ -94,6 +102,7 @@ var MenuController = function () {
 					    todoDay = finalDate.getUTCDate(),
 					    todoMonth = getMonth(finalDate.getUTCMonth());
 
+					// Check to see if the todo has been completed. If it has been we add a strikethrough style to it
 					if (done == 1) {
 						var isDone = 'todo-item--completed',
 						    isChecked = 'checked';
@@ -118,7 +127,23 @@ var MenuController = function () {
 	var addTodoMessage = function addTodoMessage() {
 
 		var zeroBuild = '\n\t\t\t<div id="add-todo-message">\n\t\t\t\tYou need to add some todos!!\n\t\t\t\t<div class="todo-owl"></div>\n\t\t\t</div>\n\t\t\t';
+
 		todoContainer.insertAdjacentHTML('afterbegin', zeroBuild);
+	};
+
+	// Shows the modal popup and adds error messages for the user
+	// The modal is hidden by default
+	var modalMessage = function modalMessage(msg) {
+
+		var modalMessage = msg,
+		    modalBody = document.querySelector('.modal-body');
+
+		// Clear the node and add the new message
+		modalBody.innerHTML = '';
+		modalBody.insertAdjacentHTML('afterbegin', modalMessage);
+
+		// Show the modal
+		$('#todo-error').modal();
 	};
 
 	// Process the input of the new todo after being submitted
@@ -130,11 +155,16 @@ var MenuController = function () {
 		event.preventDefault();
 
 		if (name === '') {
-			$('#todo-error').modal();
+			modalMessage("You forgot to enter a todo. It's ok we all make mistakes.");
 		} else {
 
 			xhr.onreadystatechange = function () {
 				if (this.readyState == 4 && this.status == 200) {
+
+					//Redirect to the todo tab if not already there
+					var activaTab = function activaTab(tabID) {
+						$('.todo-nav a[href="#' + tabID + '"]').tab('show');
+					};
 
 					// Check to see if this is the first todo to be added. If so,
 					// remove the message asking the user to add a todo and then 
@@ -143,11 +173,13 @@ var MenuController = function () {
 						todoContainer.querySelector("#add-todo-message").remove();
 					}
 
+					// Add the recently added todo to the list and then refresh the stats
 					getTodos('getLastTodo');
 					getStats();
 
 					//Clear out the input field
-					todoInput.value = '';
+					todoInput.value = '';;
+					activaTab('pills-todos');
 				}
 			};
 
@@ -156,6 +188,54 @@ var MenuController = function () {
 			xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 			xhr.send(vars);
 		};
+	};
+
+	// Checks the file that the user has selected and then updates their profile picture
+	var updateProfilePicture = function updateProfilePicture(event) {
+
+		event.preventDefault();
+
+		// fileInput is a HTMLInputElement: <input type="file" multiple id="myfileinput">
+		var fileInput = document.getElementById("todo-image-file");
+
+		// files is a FileList object (simliar to NodeList)
+		var files = fileInput.files;
+
+		// our application only allows *.png, *.jpeg and *.gif images
+		var allowedFileTypes = ["image/png", "image/jpeg", "image/gif"];
+
+		// Check if upload field is blank
+		if (files[0] == null) {
+			modalMessage("Please select a picture to upload");
+			return;
+		}
+
+		// Check if the right type of file
+		for (var i = 0; i < files.length; i++) {
+			if (allowedFileTypes.indexOf(files[i].type) == -1) {
+				modalMessage("Only these file typs are allowed: JPG, PNG, GIF");
+				return;
+			}
+		}
+
+		// Check if within size
+		for (var i = 0; i < files.length; i++) {
+			if (files[i].size > 5242880) {
+				modalMessage("5MB limit. The file you are trying to upload is too large");
+				return;
+			}
+		}
+
+		var url = "../final_twiggle/dev/api/util/updateProfilePicture.php";
+		var xhr = new XMLHttpRequest();
+		var fd = new FormData();
+
+		xhr.open("POST", url, true);
+		xhr.onreadystatechange = function () {
+			if (xhr.readyState == 4 && xhr.status == 200) {}
+		};
+		fd.append('myFile', files[0]);
+		xhr.send(fd);
 	};
 
 	// Deletes a todo
@@ -218,19 +298,25 @@ var MenuController = function () {
 	// Sets up all of the event listener for the header and menu DOM items
 	var setupEventListeners = function setupEventListeners() {
 
+		// Posting a new todo item from the input field
 		document.querySelector(DOM.todoForm).addEventListener('submit', postTodo);
+
+		// Posting a new todo item from the 'Add Todo' button
 		document.getElementById(DOM.todoButton).addEventListener('click', postTodo);
 
-		// // Listens for a click on a delete button. This bubbles up by selecting the body instead
-		// // of looping and adding an event listener for every button
+		// Adding a new profile picture from the profile page
+		document.getElementById(DOM.updatePicButton).addEventListener('click', updateProfilePicture);
+
+		// Listens for a click on a delete button. This bubbles up by selecting the body instead
+		// of looping and adding an event listener for every button
 		document.body.addEventListener('click', function (event) {
 			if (event.target.classList.contains('todo-delete')) {
 				deleteTodo(event.target.id);
 			}
 		});
 
-		// // Listens for a click on a complete checkbox. This bubbles up by selecting the body instead
-		// // of looping and adding an event listener for every checkbox
+		// Listens for a click on a complete checkbox. This bubbles up by selecting the body instead
+		// of looping and adding an event listener for every checkbox
 		document.body.addEventListener('click', function (event) {
 			if (event.target.classList.contains('check')) {
 
