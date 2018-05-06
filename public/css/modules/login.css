@@ -16,7 +16,6 @@ LOGIN PAGE STYLES STYLES
 
 .todo-login {
   margin-top: 30px;
-  /*background-color: rgb(255, 255, 255, 0.5);*/
 
   @mixin mediumScreen {
     margin-top: 180px;
@@ -25,4 +24,12 @@ LOGIN PAGE STYLES STYLES
 
 .todo-login-button {
   margin-top: 30px;
+}
+
+.todo-login-text {
+  font-size: 0.7em;
+
+  @mixin mediumScreen {
+    font-size: 1em;
+  }
 }

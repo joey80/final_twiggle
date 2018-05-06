@@ -17,3 +17,7 @@ body {
   background-color: #f6f8fb;
   color: #3b4850;
 }
+
+hr {
+  height: 6px;
+}

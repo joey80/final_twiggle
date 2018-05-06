@@ -1,0 +1,60 @@
+/*
+
+STATS SECTION STYLES
+
+*/
+
+.todo-stat-card {
+  margin-bottom: 30px;
+
+  @mixin mediumScreen {
+    margin-bottom: 0;
+  }
+
+  &__container {
+    background-color: #fff;
+    border-radius: .3rem;
+  }
+
+  &__image {
+    display: block;
+    margin: 20px auto;
+    width: 100px;
+
+    @mixin mediumScreen {
+      width: 200px;
+    }
+  }
+
+  &__title {
+    font-size: 1em;
+
+    @mixin mediumScreen {
+      font-size: 1.4em;
+    }
+  }
+
+  &__numbers {
+    display: block;
+    font-family: 'Life Savers', cursive;
+    font-size: 3em;
+
+    @mixin mediumScreen {
+      font-size: 4em;
+    }
+  }
+}
+
+.todo-owl {
+  margin: 20px auto;
+  width: 90%;
+  height: 200px;
+  background-image: url('../../images/owl.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+
+  @mixin mediumScreen {
+    height: 400px
+  }
+}

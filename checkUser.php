@@ -1,5 +1,7 @@
 <?php
 
+	session_start();
+
 	/**
 	* checkUser.php
 	*
@@ -46,6 +48,10 @@
 	// If they aren't then create a new user using auth0 info
 	// If they are then pass the result of the check back to the app
 	$user->handleUser($userData);
+
+	// Store the login inside of a session
+	$logged_in_user = $user->getCurrentUser($userInfo)->email;
+	$_SESSION['logged_in_user'] = $logged_in_user;
 
 	Util::redirect('index.php');
 
