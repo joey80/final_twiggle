@@ -6,8 +6,8 @@ var DOMController = function () {
 		todoForm: '.todo-form',
 		todoButton: 'todo-button',
 		todoInput: 'todo-input',
-		todoContainer: 'pills-todos',
-		statContainer: 'pills-stats',
+		todoContainer: 'pillTodos',
+		statContainer: 'pillStats',
 		updatePicButton: 'update-profile-picture-button',
 		fileInput: 'file'
 	};
@@ -181,14 +181,19 @@ var MenuController = function () {
 
 	// Shows the modal popup and adds error messages for the user
 	// The modal is hidden by default
-	var modalMessage = function(msg) {
+	var modalMessage = function(title, msg) {
 
-		var modalMessage = msg,
+		var modalMessageContent = msg,
+			modalTitleContent = title,
+			modalTitle = document.querySelector('.modal-title'),
 			modalBody = document.querySelector('.modal-body');
 
 		// Clear the node and add the new message
+		modalTitle.innerHTML = '';
+		modalTitle.insertAdjacentHTML('afterbegin', modalTitleContent);
+
 		modalBody.innerHTML = '';
-		modalBody.insertAdjacentHTML('afterbegin', modalMessage);
+		modalBody.insertAdjacentHTML('afterbegin', modalMessageContent);
 
 		// Show the modal
 		$('#todo-error').modal();
@@ -206,7 +211,7 @@ var MenuController = function () {
 		event.preventDefault();
 
 		if (name === '') {
-			modalMessage("You forgot to enter a todo. It's ok we all make mistakes.");
+			modalMessage("Whoopsie!", "You forgot to enter a todo. It's ok we all make mistakes.");
 		} else {
 
 			xhr.onreadystatechange = function () {
@@ -230,7 +235,7 @@ var MenuController = function () {
 					function activaTab(tabID){
 					    $('.todo-nav a[href="#' + tabID + '"]').tab('show');
 					};
-					activaTab('pills-todos');
+					activaTab('pillTodos');
 				}
 			};
 
@@ -259,14 +264,14 @@ var MenuController = function () {
 
 		// Check if upload field is blank
 		if(files[0] == null) {
-			modalMessage("Please select a picture to upload");
+			modalMessage("Upload Error", "Please select a picture to upload");
 			return;
 		}
 
 		// Check if the right type of file
 		for (var i = 0; i < files.length; i++) {
 		  if (allowedFileTypes.indexOf(files[i].type) == -1) {
-		    modalMessage("Only these file typs are allowed: JPG, PNG, GIF");
+		    modalMessage("Upload Error", "Only these file typs are allowed: JPG, PNG, GIF");
 		    return;
 		  }
 		}
@@ -274,7 +279,7 @@ var MenuController = function () {
 		// Check if within size
 		for (var i = 0; i < files.length; i++) {
 		  if (files[i].size > 5242880) {
-		    modalMessage("5MB limit. The file you are trying to upload is too large");
+		    modalMessage("Upload Error", "5MB limit. The file you are trying to upload is too large");
 		    return;
 		  }
 		}
@@ -283,11 +288,15 @@ var MenuController = function () {
         var xhr = new XMLHttpRequest();
         var fd = new FormData();
             
-        xhr.open("POST", url, true);
         xhr.onreadystatechange = function() {
             if (xhr.readyState == 4 && xhr.status == 200) {
+
+            	modalMessage("Success!", "Your profile picture has been updated. Please refresh the page to see the changes");
             }
         };
+
+        xhr.responseType = "arraybuffer";
+        xhr.open("POST", url, true);
         fd.append('myFile', files[0]);
         xhr.send(fd);
 	};

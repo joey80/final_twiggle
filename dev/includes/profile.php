@@ -11,7 +11,9 @@
 ?>
 
 <div class="card">
-  <img class="card-img-top todo-profile-image" src="<?php echo $user->picture ?>" alt="Profile Picture">
+  <div id="profile-picture-container">
+    <img class="card-img-top todo-profile-image" src="<?php echo $user->picture ?>" alt="Profile Picture">
+  </div>
   <div class="card-body">
     <h3 class="card-title"><?php echo $user->name ?></h3>
     <?php echo $user->email ?>

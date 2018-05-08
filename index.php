@@ -43,13 +43,13 @@ require_once('dev/includes/header.php');
           <!-- NAVIGATION SECTION -->
           <ul class="nav justify-content-center nav-pills mb-3 todo-nav" id="pills-tab" role="tablist">
             <li class="nav-item">
-              <a class="nav-link active" id="pills-todos-tab" data-toggle="pill" href="#pills-todos" role="tab" aria-controls="pills-home" aria-selected="true">Todos</a>
+              <a class="nav-link active" id="pills-todos-tab" data-toggle="pill" href="#pillTodos" role="tab" aria-controls="pills-home" aria-selected="true">Todos</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" id="pills-stats-tab" data-toggle="pill" href="#pills-stats" role="tab" aria-controls="pills-profile" aria-selected="false">Stats</a>
+              <a class="nav-link" id="pills-stats-tab" data-toggle="pill" href="#pillStats" role="tab" aria-controls="pills-profile" aria-selected="false">Stats</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-contact" aria-selected="false">Profile</a>
+              <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pillProfile" role="tab" aria-controls="pills-contact" aria-selected="false">Profile</a>
             </li>
           </ul>
 
@@ -65,13 +65,13 @@ require_once('dev/includes/header.php');
 
       <!-- CONTENT SECTION -->
       <div class="tab-content text-center" id="pills-tabContent">
-        <div class="tab-pane fade show active" id="pills-todos" role="tabpanel" aria-labelledby="pills-todos-tab">
+        <div class="tab-pane fade show active" id="pillTodos" role="tabpanel" aria-labelledby="pills-todos-tab">
           <!-- TODOS -->
         </div>
-        <div class="tab-pane fade" id="pills-stats" role="tabpanel" aria-labelledby="pills-stats-tab">
+        <div class="tab-pane fade" id="pillStats" role="tabpanel" aria-labelledby="pills-stats-tab">
           <!-- STATS -->
         </div>
-        <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
+        <div class="tab-pane fade" id="pillProfile" role="tabpanel" aria-labelledby="pills-profile-tab">
           <!-- PROFILE -->
           <?php require_once('dev/includes/profile.php'); ?>
         </div>
