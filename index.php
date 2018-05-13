@@ -1,7 +1,5 @@
 <?php
 
-session_start();
-
 require_once('dev/includes/init.php');
 require_once('dev/includes/authInit.php');
 $title = 'Twiggle - A Todo App';
@@ -19,8 +17,7 @@ require_once('dev/includes/header.php');
     <div class="todo-header fixed-top">
 
       <!-- IF USER ISN'T LOGGED IN SHOW THEM THE LOGIN PAGE -->
-      
-      <?php if(!isset($_SESSION['logged_in_user'])): ?>
+      <?php if(!$userInfo): ?>
         <?php require_once('dev/includes/authLogin.php'); ?>
 
       <!-- IF THEY ARE LOGGED IN SHOW THEM THE APP -->
