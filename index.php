@@ -1,5 +1,6 @@
 <?php
 
+require 'vendor/autoload.php';
 //require_once('../dev/includes/init.php');
 //require_once('../dev/includes/authInit.php');
 $title = 'Twiggle - A Todo App';
