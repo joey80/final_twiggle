@@ -1,24 +1,24 @@
 <?php
 
-require_once('dev/includes/init.php');
-require_once('dev/includes/authInit.php');
+require_once('../dev/includes/init.php');
+require_once('../dev/includes/authInit.php');
 $title = 'Twiggle - A Todo App';
 $user = User::getInstance()->getCurrentUser($userInfo);
-require_once('dev/includes/header.php');
+require_once('../dev/includes/header.php');
 
 ?>
 
   <body class="home">
 
     <!-- ERROR MODAL -->
-    <?php require_once('dev/includes/modal.php'); ?>
+    <?php require_once('../dev/includes/modal.php'); ?>
 
     <!-- START APP CONTAINER -->
     <div class="todo-header fixed-top">
 
       <!-- IF USER ISN'T LOGGED IN SHOW THEM THE LOGIN PAGE -->
       <?php if(!$userInfo): ?>
-        <?php require_once('dev/includes/authLogin.php'); ?>
+        <?php require_once('../dev/includes/authLogin.php'); ?>
 
       <!-- IF THEY ARE LOGGED IN SHOW THEM THE APP -->
       <?php else: ?>
@@ -70,7 +70,7 @@ require_once('dev/includes/header.php');
         </div>
         <div class="tab-pane fade" id="pillProfile" role="tabpanel" aria-labelledby="pills-profile-tab">
           <!-- PROFILE -->
-          <?php require_once('dev/includes/profile.php'); ?>
+          <?php require_once('../dev/includes/profile.php'); ?>
         </div>
       </div>
 
@@ -80,4 +80,4 @@ require_once('dev/includes/header.php');
     </div>
 
   <!-- FOOTER SECTION -->
-  <?php require_once('dev/includes/footer.php'); ?>
+  <?php require_once('../dev/includes/footer.php'); ?>

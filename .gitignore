@@ -1,7 +1,5 @@
 vendor/
 .env
 dev/classes/Config.class.php
-package.json
-composer.json
 node_modules/
 public/uploads/
