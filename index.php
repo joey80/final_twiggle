@@ -1,9 +1,9 @@
 <?php
 
-require_once('../dev/includes/init.php');
-require_once('../dev/includes/authInit.php');
+//require_once('../dev/includes/init.php');
+//require_once('../dev/includes/authInit.php');
 $title = 'Twiggle - A Todo App';
-$user = User::getInstance()->getCurrentUser($userInfo);
+//$user = User::getInstance()->getCurrentUser($userInfo);
 require_once('../dev/includes/header.php');
 
 ?>
@@ -66,8 +66,6 @@ require_once('../dev/includes/header.php');
           <?php require_once('../dev/includes/profile.php'); ?>
         </div>
       </div>
-
-     <?php endif ?>
 
     <!-- END APP CONTAINER -->
     </div>
