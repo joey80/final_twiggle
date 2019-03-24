@@ -17,6 +17,15 @@ Airbrake\Instance::set($notifier);
 $handler = new Airbrake\ErrorHandler($notifier);
 $handler->register();
 
+
+try {
+  throw new Exception('hello from phpbrake');
+} catch(Exception $e) {
+  Airbrake\Instance::notify($e);
+}
+
+
+
 ?>
 
   <body class="home">
