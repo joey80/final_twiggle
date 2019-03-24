@@ -8,9 +8,10 @@
 	* of the todo's from that user gets returned as a JSON object.
 	*/
 
-	include $_SERVER [ 'DOCUMENT_ROOT' ] . '/dev/includes/authInit.php';
+	//include $_SERVER [ 'DOCUMENT_ROOT' ] . '/dev/includes/authInit.php';
 	spl_autoload_register(function ($class) {
-	  include $_SERVER [ 'DOCUMENT_ROOT' ] . '/dev/classes/' . $class . '.class.php';
+	  //include $_SERVER [ 'DOCUMENT_ROOT' ] . '/dev/classes/' . $class . '.class.php';
+	  include '../dev/classes/' . $class . '.class.php';
 	});
 
 	$user = User::getInstance()->getCurrentUser($userInfo);
