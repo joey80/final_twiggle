@@ -4,7 +4,7 @@
 //require_once('../dev/includes/authInit.php');
 $title = 'Twiggle - A Todo App';
 //$user = User::getInstance()->getCurrentUser($userInfo);
-require_once('../dev/includes/header.php');
+require_once('dev/includes/header.php');
 
 use Auth0\SDK\Auth0;
 
@@ -27,7 +27,7 @@ $userInfo = $auth0->getUser();
   <body class="home">
 
     <!-- ERROR MODAL -->
-    <?php require_once('../dev/includes/modal.php'); ?>
+    <?php require_once('dev/includes/modal.php'); ?>
 
     <?php if (!$userInfo) {
         // We have no user info
@@ -92,7 +92,7 @@ $userInfo = $auth0->getUser();
         </div>
         <div class="tab-pane fade" id="pillProfile" role="tabpanel" aria-labelledby="pills-profile-tab">
           <!-- PROFILE -->
-          <?php require_once('../dev/includes/profile.php'); ?>
+          <?php require_once('dev/includes/profile.php'); ?>
         </div>
       </div>
 
@@ -100,4 +100,4 @@ $userInfo = $auth0->getUser();
     </div>
 
   <!-- FOOTER SECTION -->
-  <?php require_once('../dev/includes/footer.php'); ?>
+  <?php require_once('dev/includes/footer.php'); ?>
