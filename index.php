@@ -33,17 +33,13 @@ $userInfo = $auth0->getUser();
     <?php if (!$userInfo) {
         // We have no user info
         // redirect to Login
-        echo 'You need to login first';
+        $auth0->login();
     } else {
         // User is authenticated
         // Say hello to $userInfo['name']
         // print logout button
-        echo 'Hello ' . $userInfo['name'];
-    }
-    
-    ?>
-
-    <!-- START APP CONTAINER -->
+        ?>
+        <!-- START APP CONTAINER -->
     <div class="todo-header fixed-top">
 
         <!-- START HEADER CONTAINER -->
@@ -102,3 +98,7 @@ $userInfo = $auth0->getUser();
 
   <!-- FOOTER SECTION -->
   <?php require_once('dev/includes/footer.php'); ?>
+  <?php
+    }
+    
+    ?>
