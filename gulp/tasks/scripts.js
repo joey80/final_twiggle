@@ -17,25 +17,3 @@ gulp.task('webpack', ['babel'], function() {
 });
 
 gulp.task('scripts', ['babel']);
-
-/*
-
-gulp.task('scripts', function(callback) {
-	webpack(require('../../webpack.config.js'), function() {
-		callback();
-	})
-	return gulp.src('./app/assets/scripts/app.js')
-	.pipe(babel())
-	.pipe(gulp.dest('./app/temp/scripts'))
-});
-
-
-gulp.task('default', () =>
-	gulp.src('src/app.js')
-		.pipe(babel({
-			presets: ['env']
-		}))
-		.pipe(gulp.dest('dist'))
-);
-
-*/

@@ -111,7 +111,7 @@ var twiggle_utilityController = function () {
 				}
 			}
 
-			var url = "../final_twiggle/dev/api/util/updateProfilePicture.php",
+			var url = "../dev/api/util/updateProfilePicture.php",
 			    xhr = new XMLHttpRequest(),
 			    fd = new FormData();
 
@@ -155,7 +155,7 @@ var twiggle_todoController = function () {
 		getStats: function getStats() {
 
 			var xhr = new XMLHttpRequest(),
-			    url = '../final_twiggle/dev/api/todos/getUserStats.php';
+			    url = '../dev/api/todos/getUserStats.php';
 
 			xhr.onreadystatechange = function () {
 
@@ -190,7 +190,7 @@ var twiggle_todoController = function () {
 		getTodos: function getTodos(source) {
 
 			var xhr = new XMLHttpRequest(),
-			    url = '../final_twiggle/dev/api/todos/' + source + '.php';
+			    url = '../dev/api/todos/' + source + '.php';
 
 			xhr.onreadystatechange = function () {
 
@@ -239,7 +239,7 @@ var twiggle_todoController = function () {
 		postTodo: function postTodo(event) {
 			var name = todoInput.value,
 			    xhr = new XMLHttpRequest(),
-			    url = '../final_twiggle/dev/api/todos/addTodo.php',
+			    url = '../dev/api/todos/addTodo.php',
 			    vars = "name=" + name;
 
 			event.preventDefault();
@@ -285,7 +285,7 @@ var twiggle_todoController = function () {
 
 			var id = deleteThis,
 			    xhr = new XMLHttpRequest(),
-			    url = '../final_twiggle/dev/api/todos/deleteTodo.php',
+			    url = '../dev/api/todos/deleteTodo.php',
 			    vars = "todo_id=" + id;
 
 			xhr.onreadystatechange = function () {
@@ -314,7 +314,7 @@ var twiggle_todoController = function () {
 			var id = completeThis,
 			    name = document.querySelector('.name' + id),
 			    xhr = new XMLHttpRequest(),
-			    url = '../final_twiggle/dev/api/todos/completeTodo.php';
+			    url = '../dev/api/todos/completeTodo.php';
 
 			if (name.classList.contains('todo-item--completed')) {
 				var complete = 'notdone';
