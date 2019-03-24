@@ -6,25 +6,21 @@ $title = 'Twiggle - A Todo App';
 //$user = User::getInstance()->getCurrentUser($userInfo);
 require_once('../dev/includes/header.php');
 
-// Set up error logging
-$notifier = new Airbrake\Notifier(array(
-  'projectId' => 219693,
-  'projectKey' => '95d6d81b1a5531e36ad8faef571151b3'
-));
+use Auth0\SDK\Auth0;
 
-Airbrake\Instance::set($notifier);
+$auth0 = new Auth0([
+  'domain'                => getenv('AUTH0_DOMAIN'),
+  'client_id'             => getenv('AUTH0_CLIENT_ID'),
+  'client_secret'         => getenv('AUTH0_CLIENT_SECRET'),
+  'redirect_uri'          => getenv('AUTH0_CALLBACK_URL'),
+  'audience'              => getenv('AUTH0_AUDIENCE'),
+  'scope'                 => 'openid profile',
+  'persist_id_token'      => true,
+  'persist_access_token'  => true,
+  'persist_refresh_token' => true,
+]);
 
-$handler = new Airbrake\ErrorHandler($notifier);
-$handler->register();
-
-
-try {
-  throw new Exception('hello from phpbrake');
-} catch(Exception $e) {
-  Airbrake\Instance::notify($e);
-}
-
-
+$userInfo = $auth0->getUser();
 
 ?>
 
@@ -32,6 +28,19 @@ try {
 
     <!-- ERROR MODAL -->
     <?php require_once('../dev/includes/modal.php'); ?>
+
+    <?php if (!$userInfo) {
+        // We have no user info
+        // redirect to Login
+        echo 'You need to login first';
+    } else {
+        // User is authenticated
+        // Say hello to $userInfo['name']
+        // print logout button
+        echo 'Hello ' . $userInfo['name'];
+    }
+    
+    ?>
 
     <!-- START APP CONTAINER -->
     <div class="todo-header fixed-top">
