@@ -2,9 +2,10 @@
     "name": "auth0/basic-webapp-sample",
     "description": "Basic sample for securing a WebApp with Auth0",
     "require": {
-         "vlucas/phpdotenv": "2.4.0",
-         "auth0/auth0-php": "^5.1",
-        "airbrake/phpbrake": "^0.6.0"
+        "vlucas/phpdotenv": "2.4.0",
+        "auth0/auth0-php": "^5.1",
+        "airbrake/phpbrake": "^0.6.0",
+        "ext-memcached": "*"
     },
     "license": "MIT",
     "authors": [
