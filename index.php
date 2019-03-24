@@ -6,6 +6,17 @@ $title = 'Twiggle - A Todo App';
 //$user = User::getInstance()->getCurrentUser($userInfo);
 require_once('../dev/includes/header.php');
 
+// Set up error logging
+$notifier = new Airbrake\Notifier(array(
+  'projectId' => 219693,
+  'projectKey' => '95d6d81b1a5531e36ad8faef571151b3'
+));
+
+Airbrake\Instance::set($notifier);
+
+$handler = new Airbrake\ErrorHandler($notifier);
+$handler->register();
+
 ?>
 
   <body class="home">
