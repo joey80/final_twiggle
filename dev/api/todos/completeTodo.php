@@ -11,9 +11,9 @@
 	*/
 
 
-	include $_SERVER [ 'DOCUMENT_ROOT' ] . '/final_twiggle/dev/includes/authInit.php';
+	include $_SERVER [ 'DOCUMENT_ROOT' ] . '/dev/includes/authInit.php';
 	spl_autoload_register(function ($class) {
-	  include $_SERVER [ 'DOCUMENT_ROOT' ] . '/final_twiggle/dev/classes/' . $class . '.class.php';
+	  include $_SERVER [ 'DOCUMENT_ROOT' ] . '/dev/classes/' . $class . '.class.php';
 	});
 
 	$user = User::getInstance()->getCurrentUser($userInfo);

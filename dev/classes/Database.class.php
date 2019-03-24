@@ -24,8 +24,8 @@ class Database {
 
   public static function getInstance() {
     if (static::$_db === NULL) {
-      $dsn = 'mysql:host=' . Config::DB_HOST . ';dbname=' . Config::DB_NAME . ';charset=utf8';
-      static::$_db = new PDO($dsn, Config::DB_USER, Config::DB_PASS);
+      $dsn = 'mysql:host=' . getenv('DB_HOST') . ';dbname=' . getenv('DB_NAME') . ';charset=utf8';
+      static::$_db = new PDO($dsn, getenv('DB_USERNAME'), getenv('DB_PASSWORD'));
 
       // Raise exceptions when a database exception occurs
       static::$_db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
