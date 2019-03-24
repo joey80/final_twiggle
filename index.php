@@ -16,13 +16,6 @@ require_once('../dev/includes/header.php');
     <!-- START APP CONTAINER -->
     <div class="todo-header fixed-top">
 
-      <!-- IF USER ISN'T LOGGED IN SHOW THEM THE LOGIN PAGE -->
-      <!-- <?php if(!$userInfo): ?>
-        <?php require_once('../dev/includes/authLogin.php'); ?> -->
-
-      <!-- IF THEY ARE LOGGED IN SHOW THEM THE APP -->
-      <!-- <?php else: ?> -->
-
         <!-- START HEADER CONTAINER -->
         <div class="container-fluid">
           
