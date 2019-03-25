@@ -6,7 +6,7 @@ spl_autoload_register(function ($class) {
 });
 
 //require_once('../dev/includes/init.php');
-//require_once('../dev/includes/authInit.php');
+require_once('dev/includes/authInit.php');
 $title = 'Twiggle - A Todo App';
 require_once('dev/includes/header.php');
 
