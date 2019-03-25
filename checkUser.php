@@ -47,6 +47,6 @@
 	// If they are then pass the result of the check back to the app
 	$user->handleUser($userData);
 
-	Util::redirect('index.php');
+	//Util::redirect('index.php');
 
 ?>
