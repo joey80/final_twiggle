@@ -17,7 +17,7 @@ class Util {
   */
 
   public static function redirect($url) {
-    header('Location: http://' . $_SERVER['HTTP_HOST'] . '/' . $url);
+    header('Location: https://' . $_SERVER['HTTP_HOST'] . '/' . $url);
     exit;
   }
 

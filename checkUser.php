@@ -11,10 +11,10 @@
 	*/
 
 	spl_autoload_register(function ($class) {
-	  include '../dev/classes/' . $class . '.class.php';
+		include $_SERVER [ 'DOCUMENT_ROOT' ] . '/dev/classes/' . $class . '.class.php';
 	});
 
-	require_once('../dev/includes/authInit.php');
+	require_once($_SERVER [ 'DOCUMENT_ROOT' ] . '/dev/includes/authInit.php');
 
 	// Check for Undefined fields for the first and last names
 	if (!isset($userInfo['given_name'])) {
