@@ -4,7 +4,6 @@ require 'vendor/autoload.php';
 //require_once('../dev/includes/init.php');
 //require_once('../dev/includes/authInit.php');
 $title = 'Twiggle - A Todo App';
-//$user = User::getInstance()->getCurrentUser($userInfo);
 require_once('dev/includes/header.php');
 
 use Auth0\SDK\Auth0;
@@ -22,6 +21,7 @@ $auth0 = new Auth0([
 ]);
 
 $userInfo = $auth0->getUser();
+$user = User::getInstance()->getCurrentUser($userInfo);
 
 ?>
 
@@ -35,9 +35,6 @@ $userInfo = $auth0->getUser();
         // redirect to Login
         $auth0->login();
     } else {
-        // User is authenticated
-        // Say hello to $userInfo['name']
-        // print logout button
         ?>
         <!-- START APP CONTAINER -->
     <div class="todo-header fixed-top">

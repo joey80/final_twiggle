@@ -12,7 +12,6 @@
 	//include $_SERVER [ 'DOCUMENT_ROOT' ] . '/dev/includes/authInit.php';
 	spl_autoload_register(function ($class) {
 	  include $_SERVER [ 'DOCUMENT_ROOT' ] . '/dev/classes/' . $class . '.class.php';
-	  //include 'https://joeyui-twiggle.herokuapp.com/dev/classes/' . $class . '.class.php';
 	});
 
 	$user = User::getInstance()->getCurrentUser($userInfo);
