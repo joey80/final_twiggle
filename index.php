@@ -25,7 +25,6 @@ require_once('dev/includes/header.php');
 // ]);
 
 // $userInfo = $auth0->getUser();
-echo print_r($userInfo);
 $user = User::getInstance()->getCurrentUser($userInfo);
 
 ?>
@@ -40,6 +39,7 @@ $user = User::getInstance()->getCurrentUser($userInfo);
         // redirect to Login
         $auth0->login();
     } else {
+      echo print_r($userInfo);
         ?>
         <!-- START APP CONTAINER -->
     <div class="todo-header fixed-top">
