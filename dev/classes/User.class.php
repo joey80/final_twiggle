@@ -108,6 +108,8 @@ class User {
       $stmt->bindParam(':picture', $data['picture']);
       $stmt->execute();
 
+      return $data;
+
       } catch(PDOException $exception) {
         error_log($exception->getMessage());
       }
@@ -125,10 +127,8 @@ class User {
 
   public static function handleUser($data) {
 
-    if(static::isAlreadyAUser($data)) {
-      return true;
-    }
-
+    return static::isAlreadyAUser($data)
+    
   }
 
 
