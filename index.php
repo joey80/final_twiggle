@@ -6,25 +6,26 @@ spl_autoload_register(function ($class) {
 });
 
 //require_once('../dev/includes/init.php');
-//require_once('dev/includes/authInit.php');
+include 'dev/includes/authInit.php';
 $title = 'Twiggle - A Todo App';
 require_once('dev/includes/header.php');
 
-use Auth0\SDK\Auth0;
+// use Auth0\SDK\Auth0;
 
-$auth0 = new Auth0([
-  'domain'                => getenv('AUTH0_DOMAIN'),
-  'client_id'             => getenv('AUTH0_CLIENT_ID'),
-  'client_secret'         => getenv('AUTH0_CLIENT_SECRET'),
-  'redirect_uri'          => getenv('AUTH0_CALLBACK_URL'),
-  'audience'              => getenv('AUTH0_AUDIENCE'),
-  'scope'                 => 'openid profile',
-  'persist_id_token'      => true,
-  'persist_access_token'  => true,
-  'persist_refresh_token' => true,
-]);
+// $auth0 = new Auth0([
+//   'domain'                => getenv('AUTH0_DOMAIN'),
+//   'client_id'             => getenv('AUTH0_CLIENT_ID'),
+//   'client_secret'         => getenv('AUTH0_CLIENT_SECRET'),
+//   'redirect_uri'          => getenv('AUTH0_CALLBACK_URL'),
+//   'audience'              => getenv('AUTH0_AUDIENCE'),
+//   'scope'                 => 'openid profile',
+//   'persist_id_token'      => true,
+//   'persist_access_token'  => true,
+//   'persist_refresh_token' => true,
+// ]);
 
-$userInfo = $auth0->getUser();
+// $userInfo = $auth0->getUser();
+echo print_r($userInfo);
 $user = User::getInstance()->getCurrentUser($userInfo);
 
 ?>
