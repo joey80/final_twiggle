@@ -127,8 +127,8 @@ class User {
 
   public static function handleUser($data) {
 
-    return static::isAlreadyAUser($data)
-    
+    return static::isAlreadyAUser($data);
+
   }
 
 
