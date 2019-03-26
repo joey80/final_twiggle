@@ -48,7 +48,7 @@ $user = User::getInstance()->getCurrentUser($userInfo);
           
           <!-- LOGO AND TODO INPUT SECTION -->
           <div class="jumbotron">
-            <span class="app-title">Twiggle</span><span class="app-subtitle"> - A Todo App for <?php echo $user->name ?></span>
+            <span class="app-title">Twiggle</span><span class="app-subtitle"> - A Todo App for test <?php echo print_r($user) ?></span>
             <form class="input-group todo-form mb-3">
               <input type="text" class="form-control" id="todo-input" autocomplete="off" placeholder="What Do You Need To Do?" aria-label="What Do You Need To Do?" aria-describedby="basic-addon2">
               <div class="input-group-append">
