@@ -6,7 +6,7 @@ spl_autoload_register(function ($class) {
 });
 
 //require_once('../dev/includes/init.php');
-//require_once('dev/includes/authInit.php');
+require_once('dev/includes/authInit.php');
 $title = 'Twiggle - A Todo App';
 require_once('dev/includes/header.php');
 
@@ -24,7 +24,7 @@ require_once('dev/includes/header.php');
 //   'persist_refresh_token' => true,
 // ]);
 
-$userInfo = $auth0->getUser();
+//$userInfo = $auth0->getUser();
 $user = User::getInstance()->getCurrentUser($userInfo);
 
 ?>
