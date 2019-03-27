@@ -9,8 +9,7 @@ include 'dev/includes/authInit.php';
 $title = 'Twiggle - A Todo App';
 require_once('dev/includes/header.php');
 
-$user = User::getInstance();
-$user->getCurrentUser($userInfo);
+$user = User::getInstance()->getCurrentUser($userInfo);
 
 ?>
 

@@ -9,8 +9,8 @@
 
 class User {
 
-  private static $instance;
-  private static $currentUser;
+  public static $instance;
+  public static $currentUser;
   private function __construct() {}
 
 
@@ -77,8 +77,7 @@ class User {
       if (isset($data)) {
         // Cache the object so that in a single request the data is loaded from the database only once.
         static::$currentUser = static::isAlreadyAUser($data);
-      } else {
-        return;
+        return static::$currentUser;
       }
     }
     return static::$currentUser;
