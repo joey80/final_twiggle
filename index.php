@@ -39,7 +39,7 @@ $user = User::getInstance()->getCurrentUser($userInfo);
         // redirect to Login
         $auth0->login();
     } else {
-      echo 'The name is: ' . $userInfo->$name;
+      echo 'The name is: ' . $userInfo['name'] . $userInfo['email'];
         ?>
         <!-- START APP CONTAINER -->
     <div class="todo-header fixed-top">
