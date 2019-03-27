@@ -17,11 +17,11 @@
 
 	$user = User::getInstance();
 	$user->getCurrentUser($userInfo);
-	//$user_id = $user->user_id;
+	$user_id = $user->user_id;
 
 	// User data
 	$userData = [
-		'user_id' => $user->user_id
+		'user_id' => $user_id
 	];
 
 	// Instantiate user
