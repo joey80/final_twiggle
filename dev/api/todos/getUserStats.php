@@ -15,7 +15,7 @@
 	});
 
 	$user = User::getInstance();
-	$user = getCurrentUser($userInfo);
+	$user->getCurrentUser($userInfo);
 	//$user_id = $user->user_id;
 
 	// User data
