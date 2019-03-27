@@ -9,21 +9,22 @@
 	* IE: todos created, todos completed, todos deleted
 	*/
 
-	//include $_SERVER [ 'DOCUMENT_ROOT' ] . '/dev/includes/authInit.php';
+	include $_SERVER [ 'DOCUMENT_ROOT' ] . '/dev/includes/authInit.php';
 	spl_autoload_register(function ($class) {
 	  include $_SERVER [ 'DOCUMENT_ROOT' ] . '/dev/classes/' . $class . '.class.php';
 	});
 
-	$user = User::getInstance()->getCurrentUser($userInfo);
-	$user_id = $user->user_id;
+	$user = User::getInstance();
+	$user = getCurrentUser($userInfo);
+	//$user_id = $user->user_id;
 
 	// User data
 	$userData = [
-		'user_id' => $user_id
+		'user_id' => $user['user_id']
 	];
 
 	// Instantiate user
-	$user = User::getInstance();
+	//$user = User::getInstance();
 
 	// Return a list of all stats for the user
 	$results = $user->getUserStats($userData);

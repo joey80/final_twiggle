@@ -11,8 +11,7 @@ class User {
 
   private static $instance;
   private static $currentUser;
-  private function __construct() {}  // disallow creating a new object of the class with new Database()
-  private function __clone() {}  // disallow cloning the class
+  private function __construct() {}
 
 
 
@@ -52,10 +51,13 @@ class User {
       $stmt->execute([':email' => $data['email']]);
       $result = $stmt->fetchObject('User');
 
-      if ($result !== false) {
-        return $result;
-      } else {
+      // Create a new user if we can't find this user in the database
+      if (!$result) {
         static::createNewUser($data);
+
+      } else {
+        static::$currentUser = $result;
+        return static::$currentUser;
       }
 
     } catch(PDOException $exception) {
@@ -74,16 +76,14 @@ class User {
 
   public function getCurrentUser($data) {
 
-    if (static::$currentUser === null) {
-      if (isset($data)) {
-        // Cache the object so that in a single request the data is loaded from the database only once.
-        static::$currentUser = static::isAlreadyAUser($data);
-      } else {
-        return;
-      }
+    if (static::$currentUser['email'] === $data['email']) {
+      return static::$currentUser;
+
+    } else {
+      // Check if this user already has an account
+      return isAlreadyAUser($data);
     }
 
-    return static::$currentUser;
   }
 
 
@@ -108,7 +108,8 @@ class User {
       $stmt->bindParam(':picture', $data['picture']);
       $stmt->execute();
 
-      return $data;
+      // After creating the user, return the full user object by calling isAlreadyAUser
+      isAlreadyAUser($data);
 
       } catch(PDOException $exception) {
         error_log($exception->getMessage());

@@ -5,27 +5,12 @@ spl_autoload_register(function ($class) {
   include $_SERVER [ 'DOCUMENT_ROOT' ] . '/dev/classes/' . $class . '.class.php';
 });
 
-//require_once('../dev/includes/init.php');
 include 'dev/includes/authInit.php';
 $title = 'Twiggle - A Todo App';
 require_once('dev/includes/header.php');
 
-// use Auth0\SDK\Auth0;
-
-// $auth0 = new Auth0([
-//   'domain'                => getenv('AUTH0_DOMAIN'),
-//   'client_id'             => getenv('AUTH0_CLIENT_ID'),
-//   'client_secret'         => getenv('AUTH0_CLIENT_SECRET'),
-//   'redirect_uri'          => getenv('AUTH0_CALLBACK_URL'),
-//   'audience'              => getenv('AUTH0_AUDIENCE'),
-//   'scope'                 => 'openid profile',
-//   'persist_id_token'      => true,
-//   'persist_access_token'  => true,
-//   'persist_refresh_token' => true,
-// ]);
-
-// $userInfo = $auth0->getUser();
-$user = User::getInstance()->getCurrentUser($userInfo);
+$user = User::getInstance();
+$user->getCurrentUser($userInfo);
 
 ?>
 
@@ -48,7 +33,7 @@ $user = User::getInstance()->getCurrentUser($userInfo);
           
           <!-- LOGO AND TODO INPUT SECTION -->
           <div class="jumbotron">
-            <span class="app-title">Twiggle</span><span class="app-subtitle"> - A Todo App for test <?php echo $user->$name ?></span>
+            <span class="app-title">Twiggle</span><span class="app-subtitle"> - A Todo App for <?php echo $user['name'] ?></span>
             <form class="input-group todo-form mb-3">
               <input type="text" class="form-control" id="todo-input" autocomplete="off" placeholder="What Do You Need To Do?" aria-label="What Do You Need To Do?" aria-describedby="basic-addon2">
               <div class="input-group-append">
