@@ -11,7 +11,7 @@
     'client_secret'         => getenv('AUTH0_CLIENT_SECRET'),
     'redirect_uri'          => getenv('AUTH0_CALLBACK_URL'),
     'audience'              => getenv('AUTH0_AUDIENCE'),
-    'scope'                 => 'openid profile',
+    'scope'                 => 'openid email profile',
     'persist_id_token'      => true,
     'persist_access_token'  => true,
     'persist_refresh_token' => true,
