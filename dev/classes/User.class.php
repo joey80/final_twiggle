@@ -81,7 +81,7 @@ class User {
 
     } else {
       // Check if this user already has an account
-      return isAlreadyAUser($data);
+      return static::isAlreadyAUser($data);
     }
 
   }
