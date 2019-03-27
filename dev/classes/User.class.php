@@ -67,24 +67,39 @@ class User {
   
 
 
-
-  /**
+ /**
   * getCurrentUser - Get the current logged in user
   *
   * @return mixed  User object if logged in, null otherwise
   */
-
   public function getCurrentUser($data) {
-
-    if (static::$currentUser['email'] === $data['email']) {
-      return static::$currentUser;
-
-    } else {
-      // Check if this user already has an account
-      static::isAlreadyAUser($data);
+    if (static::$currentUser === null) {
+      if (isset($data)) {
+        // Cache the object so that in a single request the data is loaded from the database only once.
+        static::$currentUser = static::isAlreadyAUser($data);
+      } else {
+        return;
+      }
     }
-
+    return static::$currentUser;
   }
+  // /**
+  // * getCurrentUser - Get the current logged in user
+  // *
+  // * @return mixed  User object if logged in, null otherwise
+  // */
+
+  // public function getCurrentUser($data) {
+
+  //   if (static::$currentUser['email'] === $data['email']) {
+  //     return static::$currentUser;
+
+  //   } else {
+  //     // Check if this user already has an account
+  //     static::isAlreadyAUser($data);
+  //   }
+
+  // }
 
 
 

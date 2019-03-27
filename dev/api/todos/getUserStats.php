@@ -15,8 +15,7 @@
 	  include $_SERVER [ 'DOCUMENT_ROOT' ] . '/dev/classes/' . $class . '.class.php';
 	});
 
-	$user = User::getInstance();
-	$user->getCurrentUser($userInfo);
+	$user = User::getInstance()->getCurrentUser($userInfo);
 	$user_id = $user->user_id;
 
 	// User data
