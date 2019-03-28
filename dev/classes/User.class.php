@@ -110,7 +110,7 @@ class User {
       $stmt->execute();
 
       // After creating the user, return the full user object by calling isAlreadyAUser
-      isAlreadyAUser($data);
+      static::isAlreadyAUser($data);
 
       } catch(PDOException $exception) {
         error_log($exception->getMessage());
