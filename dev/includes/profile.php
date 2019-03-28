@@ -18,7 +18,7 @@
     <h3 class="card-title"><?php echo $user->name ?></h3>
     <?php echo $user->email ?>
     <p class="card-text">User Since: <?php echo date("F Y", $mysqlDate); ?></p>
-    <p><a class="btn btn-dark btn-sm" href="/final_twiggle/logout.php">Logout</a></p>
+    <p><a class="btn btn-dark btn-sm" href="/logout.php">Logout</a></p>
     <hr>
     <form method="post" enctype="multipart/form-data">
       <label><strong>Change Profile Picture</strong></label><br />
