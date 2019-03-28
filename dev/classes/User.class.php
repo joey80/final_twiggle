@@ -88,6 +88,7 @@ class User {
       return static::$currentUser;
     } else {
       static::$currentUser = static::isAlreadyAUser($data);
+      return static::$currentUser;
     }
     
     //return static::$currentUser;
