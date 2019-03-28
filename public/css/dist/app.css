@@ -25,6 +25,17 @@ hr {
 
 /*
 
+BOOTSTRAP OVERWRITES
+
+*/
+
+.container {
+    max-width: 90% !important;
+}
+
+
+/*
+
 INPUT SECTION STYLES
 
 */
@@ -231,6 +242,8 @@ TODO SECTION STYLES
 
 .todo-delete:hover {
     cursor: pointer;
+    color: #000;
+    font-size: 1.6rem;
 }
 
 input[type="checkbox"] {
