@@ -11,6 +11,7 @@
 	*/
 
 	include $_SERVER [ 'DOCUMENT_ROOT' ] . '/dev/includes/authInit.php';
+
 	spl_autoload_register(function ($class) {
 	  include $_SERVER [ 'DOCUMENT_ROOT' ] . '/dev/classes/' . $class . '.class.php';
 	});
@@ -29,9 +30,6 @@
 		'user_id' => $user_id,
 		'created' => $created
 	];
-
-	// Instantiate Users
-	$user = User::getInstance();
 
 	// Add todo
 	$user->addTodo($userData);

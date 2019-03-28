@@ -75,23 +75,16 @@ class User {
   */
   
   public function getCurrentUser($data) {
-    
-    // if (static::$currentUser === NULL) {
-    //   if (isset($data)) {
-    //     // Cache the object so that in a single request the data is loaded from the database only once.
-    //     static::$currentUser = static::isAlreadyAUser($data);
-    //     return static::$currentUser;
-    //   }
-    // }
 
     if ($data['email'] === static::$currentUser->email) {
       return static::$currentUser;
+
     } else {
+
       static::$currentUser = static::isAlreadyAUser($data);
       return static::$currentUser;
+      
     }
-    
-    //return static::$currentUser;
   }
 
 
