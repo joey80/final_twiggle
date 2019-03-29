@@ -34,7 +34,9 @@
 
 		// Update the profile picture URL
 		$user->addProfilePicture($userData);
+		
 		//\Cloudinary\Uploader::upload($filename);
+		\Cloudinary\Uploader::upload($newfilename);
 
         // if (file_exists($_SERVER [ 'DOCUMENT_ROOT' ] . "/public/uploads/" . $newfilename)) {
         //     exit;
