@@ -6,6 +6,7 @@
 	*/
 
 	include $_SERVER [ 'DOCUMENT_ROOT' ] . '/dev/includes/authInit.php';
+
 	spl_autoload_register(function ($class) {
 	  include $_SERVER [ 'DOCUMENT_ROOT' ] . '/dev/classes/' . $class . '.class.php';
 	});
@@ -18,24 +19,26 @@
 	    $file_basename = substr($filename, 0, strripos($filename, '.')); // get file name
 	    $file_ext = substr($filename, strripos($filename, '.')); // get file extention
         $newfilename = md5($file_basename) . $file_ext;
-        $url_to_uploads = 'public/uploads/';
+        //$url_to_uploads = 'public/uploads/';
 
-        $userData = [
-        	'user_id' => $user_id,
-        	'picture' => $url_to_uploads . $newfilename
-        ];
+        // $userData = [
+        // 	'user_id' => $user_id,
+		// 	'picture' => $newfilename
+		// 	// 'picture' => $url_to_uploads . $newfilename
+        // ];
 
-        // Instantiate Users
-		$user = User::getInstance();
+        // // Instantiate Users
+		// $user = User::getInstance();
 
-		// Update the profile picture URL
-		$user->addProfilePicture($userData);
+		// // Update the profile picture URL
+		// $user->addProfilePicture($userData);
+		\Cloudinary\Uploader::upload($newfilename);
 
-        if (file_exists($_SERVER [ 'DOCUMENT_ROOT' ] . "/public/uploads/" . $newfilename)) {
-            exit;
-        } else {
-        	move_uploaded_file($_FILES["myFile"]["tmp_name"], $_SERVER [ 'DOCUMENT_ROOT' ] . "/public/uploads/" . $newfilename);
-	    	exit;
-		}
+        // if (file_exists($_SERVER [ 'DOCUMENT_ROOT' ] . "/public/uploads/" . $newfilename)) {
+        //     exit;
+        // } else {
+        // 	move_uploaded_file($_FILES["myFile"]["tmp_name"], $_SERVER [ 'DOCUMENT_ROOT' ] . "/public/uploads/" . $newfilename);
+	    // 	exit;
+		// }
 	}
 ?>
