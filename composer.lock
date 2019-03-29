@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "bfafb483c25c8450a0b48d52443236de",
+    "content-hash": "7abd74978c1097f75e343d82a2ea9448",
     "packages": [
         {
             "name": "airbrake/phpbrake",
@@ -147,6 +147,58 @@
                 "lru"
             ],
             "time": "2013-09-20T18:59:12+00:00"
+        },
+        {
+            "name": "cloudinary/cloudinary_php",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/cloudinary/cloudinary_php.git",
+                "reference": "fd6a49f1ca585c896f0730ec46bf37967bb454db"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/cloudinary/cloudinary_php/zipball/fd6a49f1ca585c896f0730ec46bf37967bb454db",
+                "reference": "fd6a49f1ca585c896f0730ec46bf37967bb454db",
+                "shasum": ""
+            },
+            "require": {
+                "ext-curl": "*",
+                "ext-json": "*",
+                "php": ">=5.4.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "4.8.*"
+            },
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "src"
+                ],
+                "files": [
+                    "src/Helpers.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Cloudinary",
+                    "homepage": "https://github.com/cloudinary/cloudinary_php/graphs/contributors"
+                }
+            ],
+            "description": "Cloudinary PHP SDK",
+            "homepage": "https://github.com/cloudinary/cloudinary_php",
+            "keywords": [
+                "cdn",
+                "cloud",
+                "cloudinary",
+                "image management",
+                "sdk"
+            ],
+            "time": "2019-03-07T12:15:03+00:00"
         },
         {
             "name": "firebase/php-jwt",
@@ -521,11 +573,11 @@
     "packages-dev": [],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {
+        "cloudinary/cloudinary_php": 20
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
-    "platform": {
-        "ext-memcached": "*"
-    },
+    "platform": [],
     "platform-dev": []
 }
