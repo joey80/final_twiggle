@@ -19,7 +19,8 @@
 		$filename = $_FILES['myFile']['name'];
 	    $file_basename = substr($filename, 0, strripos($filename, '.')); // get file name
 	    $file_ext = substr($filename, strripos($filename, '.')); // get file extention
-        $newfilename = md5($file_basename) . $file_ext;
+		//$newfilename = md5($file_basename) . $file_ext;
+		$newfilename = $file_basename . $file_ext;
         //$url_to_uploads = 'public/uploads/';
 
         // $userData = [
