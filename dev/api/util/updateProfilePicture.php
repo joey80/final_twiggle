@@ -5,6 +5,7 @@
 	*
 	*/
 
+	require $_SERVER [ 'DOCUMENT_ROOT' ] . '/vendor/autoload.php';
 	include $_SERVER [ 'DOCUMENT_ROOT' ] . '/dev/includes/authInit.php';
 
 	spl_autoload_register(function ($class) {
