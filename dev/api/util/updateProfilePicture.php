@@ -20,7 +20,7 @@
 	    $file_basename = substr($filename, 0, strripos($filename, '.')); // get file name
 	    $file_ext = substr($filename, strripos($filename, '.')); // get file extention
 		//$newfilename = md5($file_basename) . $file_ext;
-		$newfilename = $file_basename . $file_ext;
+		//$newfilename = $_FILES['myFile']['tmp_name'];
         //$url_to_uploads = 'public/uploads/';
 
         // $userData = [
@@ -34,7 +34,7 @@
 
 		// // Update the profile picture URL
 		// $user->addProfilePicture($userData);
-		\Cloudinary\Uploader::upload($_FILES['myFile']);
+		\Cloudinary\Uploader::upload($filename);
 
         // if (file_exists($_SERVER [ 'DOCUMENT_ROOT' ] . "/public/uploads/" . $newfilename)) {
         //     exit;
