@@ -19,22 +19,22 @@
 		$filename = $_FILES['myFile']['name'];
 	    $file_basename = substr($filename, 0, strripos($filename, '.')); // get file name
 	    $file_ext = substr($filename, strripos($filename, '.')); // get file extention
-		//$newfilename = md5($file_basename) . $file_ext;
-		//$newfilename = $_FILES['myFile']['tmp_name'];
-        //$url_to_uploads = 'public/uploads/';
+		$newfilename = md5($file_basename) . $file_ext;
+		$newfilename = $_FILES['myFile']['tmp_name'];
+        $url_to_uploads = 'public/uploads/';
 
-        // $userData = [
-        // 	'user_id' => $user_id,
-		// 	'picture' => $newfilename
-		// 	// 'picture' => $url_to_uploads . $newfilename
-        // ];
+        $userData = [
+        	'user_id' => $user_id,
+			//'picture' => $newfilename
+			'picture' => $url_to_uploads . $newfilename
+        ];
 
-        // // Instantiate Users
-		// $user = User::getInstance();
+        // Instantiate Users
+		$user = User::getInstance();
 
-		// // Update the profile picture URL
-		// $user->addProfilePicture($userData);
-		\Cloudinary\Uploader::upload($filename);
+		// Update the profile picture URL
+		$user->addProfilePicture($userData);
+		//\Cloudinary\Uploader::upload($filename);
 
         // if (file_exists($_SERVER [ 'DOCUMENT_ROOT' ] . "/public/uploads/" . $newfilename)) {
         //     exit;

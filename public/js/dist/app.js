@@ -85,7 +85,7 @@ var twiggle_utilityController = function () {
 
 			// files is a FileList object (simliar to NodeList)
 			var files = fileInput.files;
-			console.log('the files are: ', files);
+			
 			// our application only allows *.png, *.jpeg and *.gif images
 			var allowedFileTypes = ["image/png", "image/jpeg", "image/gif"];
 

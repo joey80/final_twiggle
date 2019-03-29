@@ -23,8 +23,7 @@
     <form method="post" enctype="multipart/form-data">
       <label><strong>Change Profile Picture</strong></label><br />
       <label><span class="small text-muted">Must be a .JPG, .PNG, or .GIF and 5MB or less in size</span></label><br />
-      <!-- <input type="file" class="filestyle" data-placeholder="No file" name="file" id="todo-image-file" hidden><br /> -->
-      <?php echo cl_image_upload_tag("image_id"); ?>
+      <input type="file" class="filestyle" data-placeholder="No file" name="file" id="todo-image-file" hidden><br />
       <button class="btn btn-outline-primary" id="update-profile-picture-button" type="submit" name="submit" value="Upload Profile Picture">Upload</button>
     </form>
   </div>
