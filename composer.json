@@ -5,8 +5,7 @@
         "vlucas/phpdotenv": "2.4.0",
         "auth0/auth0-php": "^5.1",
         "airbrake/phpbrake": "^0.6.0",
-        "cloudinary/cloudinary_php": "dev-master",
-        "ext-memcached": "*"
+        "cloudinary/cloudinary_php": "dev-master"
     },
     "license": "MIT",
     "authors": [
