@@ -140,7 +140,7 @@ var twiggle_utilityController = function () {
 				},
 				data: formData
 			}).then(function(res) {
-				profileImage,src = res.secure_url;
+				profileImage.src = res.secure_url;
 				return axios({
 					url: '../dev/api/util/updateProfilePicture.php',
 					method: 'POST',
