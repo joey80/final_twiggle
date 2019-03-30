@@ -137,7 +137,7 @@ var twiggle_utilityController = function () {
 				headers: {
 					'Content-Type': 'application/x-www-form-urlencoded'
 				},
-				data: formdata
+				data: formData
 			}).then(function(res) {
 				console.log(res);
 			}).catch(function(err) {
