@@ -126,7 +126,7 @@ var twiggle_utilityController = function () {
 			// xhr.open("POST", url, true);
 			// fd.append('myFile', files[0]);
 			// xhr.send(fd);
-
+			console.log(event.target);
 			const formData = new FormData();
 			const file = event.target.files[0];
 			formData.append('file', file);
