@@ -18,8 +18,10 @@
 		$user_id = $user->user_id;
 
 		// Sanatize the post request
-		$POST = filter_var_array($_POST, FILTER_SANITIZE_STRING);
-		$url = $POST['url'];
+		//$POST = filter_var_array($_POST, FILTER_SANITIZE_STRING);
+		$data = json_decode(file_get_contents("php://input"), TRUE);
+		$url = $data['url'];
+		//$url = $POST['url'];
 
 		// $filename = $_FILES['myFile']['name'];
 	    // $file_basename = substr($filename, 0, strripos($filename, '.')); // get file name
