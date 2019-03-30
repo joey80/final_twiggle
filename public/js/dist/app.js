@@ -126,13 +126,13 @@ var twiggle_utilityController = function () {
 			// xhr.open("POST", url, true);
 			// fd.append('myFile', files[0]);
 			// xhr.send(fd);
-			console.log(event.target);
+			console.log(files[0]);
 			const formData = new FormData();
 			//const file = event.target.files[0];
 			formData.append('file', files[0]);
-			formData.append('upload_preset', process.env.CLOUDINARY_UPLOAD_PRESET);
+			formData.append('upload_preset', 'es6n0oaj');
 			axios({
-				url: `https://api.cloudinary.com/v1_1/${process.env.CLOUDINARY_NAME}/image/upload`,
+				url: 'https://api.cloudinary.com/v1_1/hccowvnww/image/upload',
 				method: 'POST',
 				headers: {
 					'Content-Type': 'application/x-www-form-urlencoded'
