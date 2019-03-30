@@ -16,6 +16,11 @@
 
 		$user = User::getInstance()->getCurrentUser($userInfo);
 		$user_id = $user->user_id;
+
+		// Sanatize the post request
+		$POST = filter_var_array($_POST, FILTER_SANITIZE_STRING);
+		$url = $POST['data'];
+
 		// $filename = $_FILES['myFile']['name'];
 	    // $file_basename = substr($filename, 0, strripos($filename, '.')); // get file name
 	    // $file_ext = substr($filename, strripos($filename, '.')); // get file extention
@@ -25,7 +30,7 @@
 
         $userData = [
         	'user_id' => $user_id,
-			'picture' => $data
+			'picture' => $url
         ];
 
         // Instantiate Users
