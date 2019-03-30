@@ -1,3 +1,5 @@
+import axios from 'axios';
+
 'use strict';
 
 /**
@@ -81,51 +83,68 @@ var twiggle_utilityController = function () {
 			event.preventDefault();
 
 			// fileInput is a HTMLInputElement: <input type="file" multiple id="myfileinput">
-			var fileInput = document.getElementById(DOM.todoImageFile);
+			//var fileInput = document.getElementById(DOM.todoImageFile);
 
 			// files is a FileList object (simliar to NodeList)
-			var files = fileInput.files;
-			
+			// var files = fileInput.files;
+
 			// our application only allows *.png, *.jpeg and *.gif images
-			var allowedFileTypes = ["image/png", "image/jpeg", "image/gif"];
+			// var allowedFileTypes = ["image/png", "image/jpeg", "image/gif"];
 
 			// Check if upload field is blank
-			if (files[0] == null) {
-				twiggle_utilityController.modalMessage("Upload Error", "Please select a picture to upload");
-				return;
-			}
+			// if (files[0] == null) {
+			// 	twiggle_utilityController.modalMessage("Upload Error", "Please select a picture to upload");
+			// 	return;
+			// }
 
-			// Check if the right type of file
-			for (var i = 0; i < files.length; i++) {
-				if (allowedFileTypes.indexOf(files[i].type) == -1) {
-					twiggle_utilityController.modalMessage("Upload Error", "Only these file typs are allowed: JPG, PNG, GIF");
-					return;
-				}
-			}
+			// // Check if the right type of file
+			// for (var i = 0; i < files.length; i++) {
+			// 	if (allowedFileTypes.indexOf(files[i].type) == -1) {
+			// 		twiggle_utilityController.modalMessage("Upload Error", "Only these file typs are allowed: JPG, PNG, GIF");
+			// 		return;
+			// 	}
+			// }
 
-			// Check if within size
-			for (var i = 0; i < files.length; i++) {
-				if (files[i].size > 5242880) {
-					twiggle_utilityController.modalMessage("Upload Error", "5MB limit. The file you are trying to upload is too large");
-					return;
-				}
-			}
+			// // Check if within size
+			// for (var i = 0; i < files.length; i++) {
+			// 	if (files[i].size > 5242880) {
+			// 		twiggle_utilityController.modalMessage("Upload Error", "5MB limit. The file you are trying to upload is too large");
+			// 		return;
+			// 	}
+			// }
 
-			var url = "../dev/api/util/updateProfilePicture.php",
-			    xhr = new XMLHttpRequest(),
-			    fd = new FormData();
+			// var url = "../dev/api/util/updateProfilePicture.php",
+			//     xhr = new XMLHttpRequest(),
+			//     fd = new FormData();
 
-			xhr.onreadystatechange = function () {
-				if (xhr.readyState == 4 && xhr.status == 200) {
+			// xhr.onreadystatechange = function () {
+			// 	if (xhr.readyState == 4 && xhr.status == 200) {
 
-					twiggle_utilityController.modalMessage("Success!", "Your profile picture has been updated. Please refresh the page to see the changes");
-				}
-			};
+			// 		twiggle_utilityController.modalMessage("Success!", "Your profile picture has been updated. Please refresh the page to see the changes");
+			// 	}
+			// };
 
-			xhr.responseType = "arraybuffer";
-			xhr.open("POST", url, true);
-			fd.append('myFile', files[0]);
-			xhr.send(fd);
+			// xhr.responseType = "arraybuffer";
+			// xhr.open("POST", url, true);
+			// fd.append('myFile', files[0]);
+			// xhr.send(fd);
+
+			const formData = new FormData();
+			const file = event.target.files[0];
+			formData.append('file', file);
+			formData.append('upload_preset', process.env.CLOUDINARY_UPLOAD_PRESET);
+			axios({
+				url: `https://api.cloudinary.com/v1_1/${process.env.CLOUDINARY_NAME}/image/upload`,
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/x-www-form-urlencoded'
+				},
+				data: formdata
+			}).then(function(res) {
+				console.log(res);
+			}).catch(function(err) {
+				console.log(err);
+			});
 		}
 	};
 }();
