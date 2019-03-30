@@ -81,10 +81,10 @@ var twiggle_utilityController = function () {
 			event.preventDefault();
 
 			// fileInput is a HTMLInputElement: <input type="file" multiple id="myfileinput">
-			//var fileInput = document.getElementById(DOM.todoImageFile);
+			const fileInput = document.getElementById(DOM.todoImageFile);
 
 			// files is a FileList object (simliar to NodeList)
-			// var files = fileInput.files;
+			const files = fileInput.files;
 
 			// our application only allows *.png, *.jpeg and *.gif images
 			// var allowedFileTypes = ["image/png", "image/jpeg", "image/gif"];
@@ -128,8 +128,8 @@ var twiggle_utilityController = function () {
 			// xhr.send(fd);
 			console.log(event.target);
 			const formData = new FormData();
-			const file = event.target.files[0];
-			formData.append('file', file);
+			//const file = event.target.files[0];
+			formData.append('file', files[0]);
 			formData.append('upload_preset', process.env.CLOUDINARY_UPLOAD_PRESET);
 			axios({
 				url: `https://api.cloudinary.com/v1_1/${process.env.CLOUDINARY_NAME}/image/upload`,
