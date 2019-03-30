@@ -19,7 +19,7 @@
 
 		// Sanatize the post request
 		$POST = filter_var_array($_POST, FILTER_SANITIZE_STRING);
-		$url = $POST['data'];
+		$url = $POST['url'];
 
 		// $filename = $_FILES['myFile']['name'];
 	    // $file_basename = substr($filename, 0, strripos($filename, '.')); // get file name

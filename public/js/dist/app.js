@@ -147,7 +147,9 @@ var twiggle_utilityController = function () {
 					headers: {
 						'Content-Type': 'application/x-www-form-urlencoded'
 					},
-					data: res.data.secure_url
+					data: {
+						url: res.data.secure_url
+					}
 				})
 			}).catch(function(err) {
 				console.log(err);
