@@ -140,14 +140,14 @@ var twiggle_utilityController = function () {
 				},
 				data: formData
 			}).then(function(res) {
-				profileImage.src = res.secure_url;
+				profileImage.src = res.data.secure_url;
 				return axios({
 					url: '../dev/api/util/updateProfilePicture.php',
 					method: 'POST',
 					headers: {
 						'Content-Type': 'application/x-www-form-urlencoded'
 					},
-					data: res.secure_url
+					data: res.data.secure_url
 				})
 			}).catch(function(err) {
 				console.log(err);
