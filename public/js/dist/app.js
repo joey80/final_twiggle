@@ -78,14 +78,6 @@ var twiggle_utilityController = function () {
 		// Checks the file that the user has selected and then updates their profile picture
 		updateProfilePicture: function updateProfilePicture(event) {
 
-			event.preventDefault();
-
-			// fileInput is a HTMLInputElement: <input type="file" multiple id="myfileinput">
-			const fileInput = document.getElementById(DOM.todoImageFile);
-
-			// files is a FileList object (simliar to NodeList)
-			const files = fileInput.files;
-
 			// our application only allows *.png, *.jpeg and *.gif images
 			// var allowedFileTypes = ["image/png", "image/jpeg", "image/gif"];
 
@@ -126,11 +118,20 @@ var twiggle_utilityController = function () {
 			// xhr.open("POST", url, true);
 			// fd.append('myFile', files[0]);
 			// xhr.send(fd);
-			console.log(files[0]);
+
+			event.preventDefault();
+
+			// fileInput is a HTMLInputElement: <input type="file" multiple id="myfileinput">
+			const fileInput = document.getElementById(DOM.todoImageFile);
+
+			// files is a FileList object (simliar to NodeList)
+			const files = fileInput.files;
+			const profileImage = document.querySelector('.todo-profile-image');
+
 			const formData = new FormData();
-			//const file = event.target.files[0];
 			formData.append('file', files[0]);
 			formData.append('upload_preset', 'es6n0oaj');
+
 			axios({
 				url: 'https://api.cloudinary.com/v1_1/hccowvnww/image/upload',
 				method: 'POST',
@@ -139,7 +140,15 @@ var twiggle_utilityController = function () {
 				},
 				data: formData
 			}).then(function(res) {
-				console.log(res);
+				profileImage,src = res.secure_url;
+				return axios({
+					url: '../dev/api/util/updateProfilePicture.php',
+					method: 'POST',
+					headers: {
+						'Content-Type': 'application/x-www-form-urlencoded'
+					},
+					data: res.secure_url
+				})
 			}).catch(function(err) {
 				console.log(err);
 			});

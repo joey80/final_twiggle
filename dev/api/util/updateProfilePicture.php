@@ -12,21 +12,20 @@
 	  include $_SERVER [ 'DOCUMENT_ROOT' ] . '/dev/classes/' . $class . '.class.php';
 	});
 
-	if (isset($_FILES['myFile'])) {
+	//if (isset($_FILES['myFile'])) {
 
 		$user = User::getInstance()->getCurrentUser($userInfo);
 		$user_id = $user->user_id;
-		$filename = $_FILES['myFile']['name'];
-	    $file_basename = substr($filename, 0, strripos($filename, '.')); // get file name
-	    $file_ext = substr($filename, strripos($filename, '.')); // get file extention
-		$newfilename = md5($file_basename) . $file_ext;
-		//$newfilename = $_FILES['myFile']['tmp_name'];
-        $url_to_uploads = 'public/uploads/';
+		// $filename = $_FILES['myFile']['name'];
+	    // $file_basename = substr($filename, 0, strripos($filename, '.')); // get file name
+	    // $file_ext = substr($filename, strripos($filename, '.')); // get file extention
+		// $newfilename = md5($file_basename) . $file_ext;
+		// //$newfilename = $_FILES['myFile']['tmp_name'];
+        // $url_to_uploads = 'public/uploads/';
 
         $userData = [
         	'user_id' => $user_id,
-			//'picture' => $newfilename
-			'picture' => $url_to_uploads . $newfilename
+			'picture' => $data
         ];
 
         // Instantiate Users
@@ -34,9 +33,6 @@
 
 		// Update the profile picture URL
 		$user->addProfilePicture($userData);
-		
-		//\Cloudinary\Uploader::upload($filename);
-		\Cloudinary\Uploader::upload($newfilename);
 
         // if (file_exists($_SERVER [ 'DOCUMENT_ROOT' ] . "/public/uploads/" . $newfilename)) {
         //     exit;
@@ -44,5 +40,5 @@
         // 	move_uploaded_file($_FILES["myFile"]["tmp_name"], $_SERVER [ 'DOCUMENT_ROOT' ] . "/public/uploads/" . $newfilename);
 	    // 	exit;
 		// }
-	}
+	//}
 ?>
