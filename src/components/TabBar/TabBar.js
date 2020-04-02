@@ -3,7 +3,7 @@ import './TabBar.scss';
 
 const TabBar = () => (
   <div className='tab-bar'>
-    <ul class='nav justify-content-center nav-pills mb-3 todo-nav' id='pills-tab' role='tablist'>
+    {/* <ul class='nav justify-content-center nav-pills mb-3 todo-nav' id='pills-tab' role='tablist'>
       <li class='nav-item'>
         <a
           class='nav-link active'
@@ -43,7 +43,7 @@ const TabBar = () => (
           Profile
         </a>
       </li>
-    </ul>
+    </ul> */}
   </div>
 );
 

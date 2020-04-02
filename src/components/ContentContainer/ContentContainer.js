@@ -2,8 +2,8 @@ import React from 'react';
 import './ContentContainer.scss';
 
 const ContentContainer = () => (
-  <div class='tab-content text-center' id='pills-tabContent'>
-    <div
+  <div className='tab-content text-center' id='pills-tabContent'>
+    {/* <div
       class='tab-pane fade show active'
       id='pillTodos'
       role='tabpanel'
@@ -16,7 +16,7 @@ const ContentContainer = () => (
     </div>
     <div class='tab-pane fade' id='pillProfile' role='tabpanel' aria-labelledby='pills-profile-tab'>
       PROFILE
-    </div>
+    </div> */}
   </div>
 );
 
