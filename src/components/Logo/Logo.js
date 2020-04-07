@@ -3,8 +3,8 @@ import './Logo.scss';
 
 const Logo = () => (
   <Fragment>
-    <span class='app-title'>Twiggle</span>
-    <span class='app-subtitle'> - A Todo App for *name*</span>
+    <span className='logo'>Twiggle</span>
+    <span className='logo logo__tagline'> - A Todo App for *name*</span>
   </Fragment>
 );
 
